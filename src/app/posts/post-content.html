@@ -1,0 +1,28 @@
+<h2 mat-dialog-title>Post</h2>
+      
+      <mat-dialog-content class="mat-typography">
+        <h3>Favor de llenar los campos correspondientes:</h3>
+        <div class="example-container">
+            <mat-form-field>
+              <input matInput placeholder="Titulo">
+            </mat-form-field>
+            <mat-form-field>
+                <input matInput placeholder="Descripcion">
+              </mat-form-field>
+              <mat-form-field>
+                  <input matInput placeholder="Imagen">
+                </mat-form-field>
+                <mat-form-field>
+                    <input matInput placeholder="Precio">
+                  </mat-form-field>
+
+            <mat-form-field>
+                <textarea matInput placeholder="Mensaje"></textarea>
+              </mat-form-field>
+          </div>
+          
+      </mat-dialog-content>
+      <mat-dialog-actions align="end">
+        <button mat-button mat-dialog-close>Cancel</button>
+        <button mat-button [mat-dialog-close]="true" cdkFocusInitial>Postear</button>
+      </mat-dialog-actions>

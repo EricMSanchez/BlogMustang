@@ -1,0 +1,115 @@
+
+@media (max-width: 600px){
+
+
+    .card-img-top {
+      width: 50%;
+    }
+    .card-img-top-two {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+      .card-deck {
+        display: -ms-flexbox;
+        display: -webkit-box;
+        display: flex;
+        -ms-flex-direction: column;
+        -webkit-box-orient: vertical;
+        -webkit-box-direction: normal;
+        flex-direction: column;
+        align-content: center;
+      }
+      .card-columns {
+          column-count: 1;
+      }
+      .col-4{
+        
+      }
+    
+    
+    
+    }
+  
+  @media (min-width: 601px){
+  
+  
+  .card-img-top {
+    width: 50%;
+  }
+  .card-img-top-two {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
+    .card-deck {
+      display: -ms-flexbox;
+      display: -webkit-box;
+      display: flex;
+      -ms-flex-direction: column;
+      -webkit-box-orient: vertical;
+      -webkit-box-direction: normal;
+      flex-direction: column;
+      align-content: center;
+    }
+    .card-columns {
+        column-count: 3;
+
+    }
+    .bricklayer {
+      margin: 10px 5px;
+    }
+    
+    .box {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 30px;
+      color: rgba(255, 255, 255, .6);
+      margin-bottom: 10px;
+      -webkit-animation-duration: .3s;
+      animation-duration: .3s;
+      min-height: 150px;
+    }
+  
+  
+  }
+
+  .object {
+    position: absolute;
+  }
+
+  #busco:hover .move-left {
+    transform: translate(-350px,0);
+    -webkit-transform: translate(-350px,0); /** Safari & Chrome **/
+    -o-transform: translate(-350px,0); /** Opera **/
+    -moz-transform: translate(-350px,0); /** Firefox **/
+}
+
+.slideLeft:hover {
+
+  transition-property: background-color, color, left;
+  /*transition-duration: 1s;*/
+  -webkit-transition-property: background-color, color, left;
+  /*-webkit-transition-duration: 1s;*/
+  -o-transition-property: background-color, color, left;
+  /*-o-transition-duration: 1s;*/
+  background-color: #a5a5a5d0;
+  /*left: 90%;*/
+  color: rgb(255, 255, 255);
+
+}
+
+
+:host {
+  display: block;
+}
+ 
+.open-close-container {
+  border: 1px solid #dddddd;
+  margin-top: 1em;
+  padding: 20px 20px 0px 20px;
+  color: #000000;
+  font-weight: bold;
+  font-size: 20px;
+}
