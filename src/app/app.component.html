@@ -1,11 +1,9 @@
-<div class="container">
+<div id="mainContainer" >
+    <app-header></app-header>
+    <div [@slideInOut]="triggerAnimation(outlet)" >
 
-
-<app-header></app-header>
-<button  *ngIf="showPosts" (click)="regresarMenu()" type="button" class="btn btn-primary">Regresar</button>
-
-<app-menu [isVisibleMenu]="showMenu"  (showMenu)="receiveMessage($event)" *ngIf="showMenu"></app-menu>
-<app-posts *ngIf="showPosts"></app-posts>
-
-
+        <router-outlet #outlet="outlet" ></router-outlet>
+        
+      </div>
+   
 </div>

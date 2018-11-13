@@ -1,13 +1,13 @@
 
 <br>
-<div [@openClose]="isOpen ? 'open' : 'closed'" class="container" >
+<div class="container" >
 
   <div *ngIf="results" class="row h-100 justify-content-center align-items-center">
       <div class="row">
 
        
           <div  *ngFor="let result of results;" class="col-12 col-md-4" style="margin-bottom:2em">
-            <div (click)="toggle()" id="{{result.id}}"  class="card list-group-item-action" >
+            <div (click)="toPosts(result.id,result.titulo)" id="{{result.id}}"  class="card list-group-item-action" >
               <div class="text-center">
                 <img class="card-img-top" [src]="result.Imagen" onError="src='../../assets/img/default.png'" alt="Card image cap" style="margin-top: 1rem">
               </div>

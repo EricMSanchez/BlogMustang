@@ -1,51 +1,22 @@
 import { Component, OnInit,Output,EventEmitter,Input  } from '@angular/core';
 import {trigger,style,transition,animate, state} from '@angular/animations';
+import { RouterLink,Router } from '@angular/router';
+import { routerNgProbeToken } from '@angular/router/src/router_module';
+import { slideInAnimation } from '../animations';
 
 @Component({
   selector: 'app-menu',
   templateUrl: './menu.component.html',
   styleUrls: ['./menu.component.css'],
   animations:[
-    trigger('showState',[
-      state('void', style({
-        transform: 'translateX(-100%)',
-        opacity: 1
-      }))
-    ]),
-    trigger('openClose',[ 
-      state('open', style({
-        opacity: 1
-      })),
-      state('closed', style({
-        opacity: 0
-      })),
-      transition('open => closed', [
-        animate('1s',style({
-          transform:'translateX(100%)',
-          opacity:0
-        }))
-      ]),
-      transition('closed => open', [
-        animate('1s')
-      ]),
-      state('void',style({
-        transform: 'translateX(100%)',
-        opacity:0
-      })),
-      transition(':enter',[
-        animate('1s',style({
-          transform:'translateX(0)',
-          opacity:1
-        }))
-      ]),
-    ])
+    slideInAnimation
   ]
 })
 
 export class MenuComponent implements OnInit {
 
   isOpen = true;
-  
+
   
   @Output() showMenu = new EventEmitter<boolean>();
 
@@ -53,14 +24,6 @@ export class MenuComponent implements OnInit {
   async  delay(ms: number) {
     return new Promise( resolve => setTimeout(resolve, ms) );
   }
-
-  async toggle() {
-    this.isOpen = !this.isOpen;
-     await this.delay(1000);
-     this.showMenu.emit(!this.isVisibleMenu);
-    
-  }
-
 
   results = [{"id":"busco","descr":"En esta seccion podras postear articulos que estes buscando.","titulo":"Busco","Imagen":"../../assets/img/search.png"},
   {"id":"vendo","descr":"Aqui podras postear y buscar articulos para venta.","titulo":"Vendo","Imagen":"../../assets/img/vendo2.png"},
@@ -70,9 +33,18 @@ export class MenuComponent implements OnInit {
   {"id":"califica","descr":"Ayuda a la comunidad proporcionando tu evaluacion.","titulo":"Califica a tu vendedor","Imagen":"../../assets/img/rate.png"}];
 
 
-  constructor() { }
+  constructor(private router: Router) { }
 
   ngOnInit() {
+  }
+
+    async toPosts(id,titulo) {
+      if(id == 'califica'){
+        this.router.navigate(['/califica',{"id":id,"titulo":titulo}], { skipLocationChange: true });
+      }else
+      {
+        this.router.navigate(['/posts',{"id":id,"titulo":titulo}], { skipLocationChange: true });
+      }
   }
 
   /*

@@ -1,9 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import {trigger,style,transition,animate, state} from '@angular/animations';
 import { MatDialog } from '@angular/material';
-
-//import { library } from '@fortawesome/fontawesome-svg-core';
-//import { fas } from '@fortawesome/free-solid-svg-icons';
+import { ActivatedRoute } from '@angular/router';
+import { fas } from '@fortawesome/free-solid-svg-icons';
 
 @Component({
   selector: 'app-posts',
@@ -49,9 +48,16 @@ import { MatDialog } from '@angular/material';
 })
 export class PostsComponent implements OnInit {
  
-  constructor(public dialog: MatDialog) { }
+  constructor(public dialog: MatDialog,private route: ActivatedRoute) { }
+
+  public CategoriaId;
+  public titulo;
 
   ngOnInit() {
+    let id = this.route.snapshot.paramMap.get('id');
+    let title = this.route.snapshot.paramMap.get('titulo');
+    this.CategoriaId = id;
+    this.titulo = title;
   }
 
   openDialog() {
