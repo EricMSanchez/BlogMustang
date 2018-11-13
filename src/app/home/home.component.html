@@ -1,0 +1,4 @@
+<button  *ngIf="showPosts" (click)="regresarMenu()" type="button" class="btn btn-primary">Regresar</button>
+    
+<app-menu [isVisibleMenu]="showMenu"  (showMenu)="receiveMessage($event)" *ngIf="showMenu"></app-menu>
+<app-posts *ngIf="showPosts"></app-posts>
