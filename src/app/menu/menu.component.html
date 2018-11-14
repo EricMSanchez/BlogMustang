@@ -7,19 +7,19 @@
 
        
           <div  *ngFor="let result of results;" class="col-12 col-md-4" style="margin-bottom:2em">
-            <div (click)="toPosts(result.id,result.titulo)" id="{{result.id}}"  class="card list-group-item-action" >
+            <div (click)="toPosts(result.categories_id,result.title)" id="{{result.categories_id}}"  class="card list-group-item-action" >
               <div class="text-center">
                 <img class="card-img-top" [src]="result.Imagen" onError="src='../../assets/img/default.png'" alt="Card image cap" style="margin-top: 1rem">
               </div>
             <div class="card-body ">
                 <div class="text-center">
-              <h5 class="card-title"><b>{{result.titulo}}</b></h5>
+              <h5 class="card-title"><b>{{result.title}}</b></h5>
                   </div>
             
                 <!-- Stack the columns on mobile by making one full-width and the other half-width -->
   <div class="container">
   <div class="row justify-content-left">
-    <div class="col-sm">{{result.descr}}</div>
+    <div class="col-sm">{{result.description}}</div>
   </div>
   </div>      
             </div>

@@ -25,12 +25,12 @@ export class MenuComponent implements OnInit {
     return new Promise( resolve => setTimeout(resolve, ms) );
   }
 
-  results = [{"id":"busco","descr":"En esta seccion podras postear articulos que estes buscando.","titulo":"Busco","Imagen":"../../assets/img/search.png"},
-  {"id":"vendo","descr":"Aqui podras postear y buscar articulos para venta.","titulo":"Vendo","Imagen":"../../assets/img/vendo2.png"},
-  {"id":"hazlo","descr":"Tutoriales o guias que te podrian servir de ayuda.","titulo":"Hazlo tu mismo","Imagen":"../../assets/img/yourself2.png"},
-  {"id":"proyecto","descr":"Quieres exponer tu proyecto? esta es la seccion.","titulo":"Mi Proyecto","Imagen":"../../assets/img/myproject.png"},
-  {"id":"partes","descr":"Busqueda de partes que no tengan que ver con Mustangs","titulo":"Partes No mustang","Imagen":"../../assets/img/engine2.png"},
-  {"id":"califica","descr":"Ayuda a la comunidad proporcionando tu evaluacion.","titulo":"Califica a tu vendedor","Imagen":"../../assets/img/rate.png"}];
+  results = [{"categories_id":"busco","description":"En esta seccion podras postear articulos que estes buscando.","title":"Busco","Imagen":"../../assets/img/search.png"},
+  {"categories_id":"vendo","description":"Aqui podras postear y buscar articulos para venta.","title":"Vendo","Imagen":"../../assets/img/vendo2.png"},
+  {"categories_id":"hazlo","description":"Tutoriales o guias que te podrian servir de ayuda.","title":"Hazlo tu mismo","Imagen":"../../assets/img/yourself2.png"},
+  {"categories_id":"proyecto","description":"Quieres exponer tu proyecto? esta es la seccion.","title":"Mi Proyecto","Imagen":"../../assets/img/myproject.png"},
+  {"categories_id":"partes","description":"Busqueda de partes que no tengan que ver con Mustangs","title":"Partes No mustang","Imagen":"../../assets/img/engine2.png"},
+  {"categories_id":"califica","description":"Ayuda a la comunidad proporcionando tu evaluacion.","title":"Califica a tu vendedor","Imagen":"../../assets/img/rate.png"}];
 
 
   constructor(private router: Router) { }
