@@ -14,7 +14,8 @@ import { RouterModule } from '@angular/router';
 import { HomeComponent } from './home/home.component';
 import { CalificaComponent } from './califica/califica.component';
 import { PostComponent } from './post/post.component'
-
+import { MenuService } from './menu.service';
+import { HttpClientModule } from '@angular/common/http'
 //import {MatDialog} from '@angular/material/dialog';
 //import {BehaviorSubject} from '../../node_modules/rxjs'
 @NgModule({
@@ -58,12 +59,13 @@ import { PostComponent } from './post/post.component'
           data: { animation: 'home' }
         }
       ]
-    )
+    ),
+    HttpClientModule
   ],
   exports: [
     NgcFloatButtonModule
   ],
-  providers: [],
+  providers: [MenuService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

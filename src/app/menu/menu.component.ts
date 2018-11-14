@@ -3,6 +3,7 @@ import {trigger,style,transition,animate, state} from '@angular/animations';
 import { RouterLink,Router } from '@angular/router';
 import { routerNgProbeToken } from '@angular/router/src/router_module';
 import { slideInAnimation } from '../animations';
+import { MenuService } from '../menu.service';
 
 @Component({
   selector: 'app-menu',
@@ -25,21 +26,19 @@ export class MenuComponent implements OnInit {
     return new Promise( resolve => setTimeout(resolve, ms) );
   }
 
-  results = [{"categories_id":"busco","description":"En esta seccion podras postear articulos que estes buscando.","title":"Busco","Imagen":"../../assets/img/search.png"},
-  {"categories_id":"vendo","description":"Aqui podras postear y buscar articulos para venta.","title":"Vendo","Imagen":"../../assets/img/vendo2.png"},
-  {"categories_id":"hazlo","description":"Tutoriales o guias que te podrian servir de ayuda.","title":"Hazlo tu mismo","Imagen":"../../assets/img/yourself2.png"},
-  {"categories_id":"proyecto","description":"Quieres exponer tu proyecto? esta es la seccion.","title":"Mi Proyecto","Imagen":"../../assets/img/myproject.png"},
-  {"categories_id":"partes","description":"Busqueda de partes que no tengan que ver con Mustangs","title":"Partes No mustang","Imagen":"../../assets/img/engine2.png"},
-  {"categories_id":"califica","description":"Ayuda a la comunidad proporcionando tu evaluacion.","title":"Califica a tu vendedor","Imagen":"../../assets/img/rate.png"}];
-
-
-  constructor(private router: Router) { }
+  results = null;
+  constructor(private router: Router,private menuService:MenuService) { }
 
   ngOnInit() {
+    this.menuService.getCategories().subscribe(data => {
+      this.results = data.categories;
+      console.log('info=',this.results);
+    });
+   
   }
 
     async toPosts(id,titulo) {
-      if(id == 'califica'){
+      if(id == '6'){
         this.router.navigate(['/califica',{"id":id,"titulo":titulo}], { skipLocationChange: true });
       }else
       {
