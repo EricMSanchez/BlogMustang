@@ -1,24 +1,27 @@
 <h2 mat-dialog-title>Agregar nuevo post</h2>
       
       <mat-dialog-content class="mat-typography">
-        <h3>Favor de llenar los campos correspondientes:</h3>
+          <p><b>Atencion!</b> Se recomienda para subir la imagen el siguiente sitio web: <a href='https://imgur.com/upload' target="_blank">https://imgur.com/upload</a>,</p>
+          <p>para subir la imagen solo es cuestion de arrastrarla desde tu equipo o elegir la imagen mediante</p>
+          <p> el boton de Browse/Buscar. </p>
+          <br>
+        <p>Favor de llenar los campos correspondientes:</p>
         <div class="example-container">
             <mat-form-field>
               <input matInput placeholder="Titulo">
             </mat-form-field>
             <mat-form-field>
                 <input matInput placeholder="Descripcion">
-              </mat-form-field>
-              <mat-form-field>
-                  <input matInput placeholder="Imagen">
-                </mat-form-field>
-                <mat-form-field>
-                    <input matInput placeholder="Precio">
-                  </mat-form-field>
-
+            </mat-form-field>
             <mat-form-field>
-                <textarea matInput placeholder="Mensaje"></textarea>
-              </mat-form-field>
+                  <input matInput placeholder="Imagen URL">
+                </mat-form-field>
+            <mat-form-field>
+                    <input matInput placeholder="Precio">
+            </mat-form-field>
+            <mat-form-field>
+                <textarea rows="5" matInput placeholder="Cuerpo"></textarea>
+            </mat-form-field>
           </div>
           
       </mat-dialog-content>

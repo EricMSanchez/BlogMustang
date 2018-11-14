@@ -2,9 +2,16 @@
 <br>
 <div class="container" >
 
+
+
+  <div class="text-center" *ngIf="!results">
+      <fa-icon [icon]="['fas', 'spinner']" [pulse]="true" size="3x"></fa-icon>
+      <h3>Cargando</h3>
+    </div>
+  
   <div *ngIf="results" class="row h-100 justify-content-center align-items-center">
       <div class="row">
-
+        
        
           <div  *ngFor="let result of results;" class="col-12 col-md-4" style="margin-bottom:2em">
             <div (click)="toPosts(result.categories_id,result.title)" id="{{result.categories_id}}"  class="card list-group-item-action" >

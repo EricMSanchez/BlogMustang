@@ -4,7 +4,12 @@ import { RouterLink,Router } from '@angular/router';
 import { routerNgProbeToken } from '@angular/router/src/router_module';
 import { slideInAnimation } from '../animations';
 import { MenuService } from '../menu.service';
+import { fas } from '@fortawesome/free-solid-svg-icons';
+//import { far } from '@fortawesome/free-regular-svg-icons';
+import { library } from '@fortawesome/fontawesome-svg-core';
 
+
+library.add(fas);
 @Component({
   selector: 'app-menu',
   templateUrl: './menu.component.html',
