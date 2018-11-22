@@ -10,6 +10,7 @@ export class DialogContentComponent implements OnInit {
   constructor() { }
 
   ngOnInit() {
+    
   }
 
 }

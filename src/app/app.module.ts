@@ -16,6 +16,10 @@ import { CalificaComponent } from './califica/califica.component';
 import { PostComponent } from './post/post.component'
 import { MenuService } from './menu.service';
 import { HttpClientModule } from '@angular/common/http'
+import { FormsModule,ReactiveFormsModule} from '@angular/forms'
+import { ErrorStateMatcher, ShowOnDirtyErrorStateMatcher } from '@angular/material';
+import { PostsService } from './posts.service';
+
 //import {MatDialog} from '@angular/material/dialog';
 //import {BehaviorSubject} from '../../node_modules/rxjs'
 @NgModule({
@@ -32,12 +36,14 @@ import { HttpClientModule } from '@angular/common/http'
   ],
   entryComponents:[DialogContentDialog],
   imports: [
+    FormsModule,
     NgbModule,
     BrowserModule,
     BrowserAnimationsModule,
     FontAwesomeModule,
     NgbModule.forRoot(),
     DemoMaterialModule,
+    ReactiveFormsModule,
     //MatDialog,
     //BehaviorSubject,
     NgcFloatButtonModule,
@@ -65,7 +71,7 @@ import { HttpClientModule } from '@angular/common/http'
   exports: [
     NgcFloatButtonModule
   ],
-  providers: [MenuService],
+  providers: [MenuService,PostsService,ErrorStateMatcher,ShowOnDirtyErrorStateMatcher],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

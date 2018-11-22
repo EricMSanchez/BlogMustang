@@ -8,24 +8,60 @@
         <p>Favor de llenar los campos correspondientes:</p>
         <div class="example-container">
             <mat-form-field>
-              <input matInput placeholder="Titulo">
+                <input  (change)="validando()" matInput placeholder="Titulo" [formControl]="title"
+                [errorStateMatcher]="matcher">
+              <!--mat-hint>Este campo es obigatorio!</mat-hint-->
+              <mat-error  *ngIf="!title.hasError('minLength(7)') || !title.hasError('required') && title.hasError('whitespace')">
+                Favor de agergar un titulo con mas de 6 caracteres.
+              </mat-error>
+              <mat-error *ngIf="title.hasError('required')">
+                Titulo es un campo <strong>obligatorio</strong>.
+              </mat-error>
             </mat-form-field>
             <mat-form-field>
-                <input matInput placeholder="Descripcion">
+                <input  (change)="validando()" matInput placeholder="Descripcion" [formControl]="descr"
+                [errorStateMatcher]="matcher">
+              <mat-error *ngIf="!descr.hasError('minLength(7)') || !descr.hasError('required') && descr.hasError('whitespace')">
+                Favor de agergar una descripcion con mas de 6 caracteres.
+              </mat-error>
+              <mat-error *ngIf="descr.hasError('required')">
+                Descripcion es un campo <strong>obligatorio</strong>.
+              </mat-error>
             </mat-form-field>
             <mat-form-field>
-                  <input matInput placeholder="Imagen URL">
-                </mat-form-field>
-            <mat-form-field>
-                    <input matInput placeholder="Precio">
+                  <input  (change)="validando()"  matInput placeholder="URL de Imagen" [formControl]="url_img"
+                [errorStateMatcher]="matcher">
+              <mat-error *ngIf="this.title.hasError('pattern')">
+                Favor de agergar un url valido.
+              </mat-error>
+              <mat-error *ngIf="url_img.hasError('required')">
+                Url de la imagen es un campo <strong>obligatorio</strong>.
+              </mat-error>
             </mat-form-field>
             <mat-form-field>
-                <textarea rows="5" matInput placeholder="Cuerpo"></textarea>
+              <input  (change)="validando()"  matInput placeholder="Precio" [formControl]="price"
+              [errorStateMatcher]="matcher">
+            <mat-error *ngIf="!price.hasError('minLength(7)') || !price.hasError('required') && price.hasError('whitespace')">
+              Favor de agergar un precio valido.
+            </mat-error>
+            <mat-error *ngIf="price.hasError('required')">
+              Precio es un campo <strong>obligatorio</strong>.
+            </mat-error>
+            </mat-form-field>
+            <mat-form-field>
+                <textarea  (change)="validando()"  matInput rows="5" matInput placeholder="Contenido" [formControl]="content"
+              [errorStateMatcher]="matcher"></textarea>
+            <mat-error *ngIf="!content.hasError('minLength(15)') || !content.hasError('required') && content.hasError('whitespace')">
+              Favor de agergar un contenido con mas de 15 caracteres.
+            </mat-error>
+            <mat-error *ngIf="content.hasError('required')">
+              Contenido es un campo <strong>obligatorio</strong>.
+            </mat-error>
             </mat-form-field>
           </div>
           
       </mat-dialog-content>
       <mat-dialog-actions align="end">
         <button mat-button mat-dialog-close>Cancel</button>
-        <button mat-button [mat-dialog-close]="true" cdkFocusInitial>Postear</button>
+        <button mat-button [mat-dialog-close]="valido" [disabled]="!valido" cdkFocusInitial>Postear</button>
       </mat-dialog-actions>
