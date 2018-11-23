@@ -19,7 +19,7 @@ export class MenuService {
   constructor(private http:HttpClient) { }
 
   getCategories(){
-    return this.http.get<myData>('http://localhost/BlogAPI/Categories/getCategories.json');
+    return this.http.get<myData>('api/BlogAPI/Categories/getCategories.json');
   }
 
 }

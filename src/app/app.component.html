@@ -1,9 +1,10 @@
 <div id="mainContainer" >
+
     <app-header></app-header>
     <div [@slideInOut]="triggerAnimation(outlet)" >
 
         <router-outlet #outlet="outlet" ></router-outlet>
         
       </div>
-   
+
 </div>

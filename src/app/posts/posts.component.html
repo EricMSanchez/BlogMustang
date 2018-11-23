@@ -20,8 +20,9 @@
           <h3 class="mb-0">
             <a class="text-dark" routerLink="/">{{post.title}}</a>
           </h3>
-          <div class="mb-1 text-muted">{{post.created_date}}</div>
+          <div class="mb-1 text-muted">{{post.created_date | date : 'd-M-yyyy hh:mm a'}}</div>
           Publicado por:<strong class="d-inline-block mb-2 text-primary"><a routerLink="/">{{post.users.name}}</a></strong>
+          <p *ngIf="CategoriaId==2">Precio: {{post.price | currency}}</p>
           <p class="card-text mb-auto">{{post.description}}</p>
           <a href="#">Continuar leyendo...</a>
         </div>

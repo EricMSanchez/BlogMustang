@@ -24,7 +24,8 @@ export class PostsService {
     body,
     price){
       var posts_id = "";
-    return this.http.post<myData>('/api/BlogAPI/Posts/add.json',{posts_id,title,description,image_url,categories_categories_id,users_users_id,created_date,modified_date,body,price});
+      var status = 'Open';
+    return this.http.post<myData>('/api/BlogAPI/Posts/add.json',{posts_id,title,description,image_url,categories_categories_id,users_users_id,created_date,modified_date,body,price,status});
   }
 
   getPostsByCategoriesId(categories_id){

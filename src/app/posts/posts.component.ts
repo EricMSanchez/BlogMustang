@@ -1,11 +1,13 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit,Inject } from '@angular/core';
 import { trigger,style,transition,animate, state} from '@angular/animations';
 import { MatDialog, ErrorStateMatcher } from '@angular/material';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute,Router } from '@angular/router';
 import { NgModel} from '@angular/forms'
 import { fas } from '@fortawesome/free-solid-svg-icons';
 import { FormControl, FormGroupDirective, NgForm, Validators} from '@angular/forms';
-import { PostsService } from '../posts.service'
+import { PostsService } from '../posts.service';
+import {formatDate } from '@angular/common';
+import {MAT_DIALOG_DATA} from '@angular/material';
 @Component({
   selector: 'app-posts',
   templateUrl: './posts.component.html',
@@ -13,7 +15,7 @@ import { PostsService } from '../posts.service'
 })
 export class PostsComponent implements OnInit {
  
-  constructor(public dialog: MatDialog,private route: ActivatedRoute,private post:PostsService) { }
+  constructor(public dialog: MatDialog,private route: ActivatedRoute,private post:PostsService,private router: Router) { }
 
   public CategoriaId;
   public titulo;
@@ -28,24 +30,7 @@ export class PostsComponent implements OnInit {
     let title = this.route.snapshot.paramMap.get('titulo');
     this.CategoriaId = id;
     this.titulo = title;
-    if(this.CategoriaId!=null)
-    {
-      this.post.getPostsByCategoriesId(this.CategoriaId).subscribe(
-        data =>{
-          if(data.posts.toString()!='')
-          {
-            this.posts = data.posts;
-            
-            //console.log('Categories_id:'+this.CategoriaId+'POST:',this.posts)
-            this.loadingPosts = false;
-          }else{
-            this.msj = 'No hay Posts en esta categoria...'
-            this.loadingPosts = false;
-          }
-        }
-      );
-      
-    }
+    this.getPosts();
   }
 
   isPosts(){
@@ -53,26 +38,50 @@ export class PostsComponent implements OnInit {
     return this.loadingPosts;
   }
 
+  getPosts(){
+    if(this.CategoriaId!=null)
+        {
+          this.post.getPostsByCategoriesId(this.CategoriaId).subscribe(
+            data =>{
+              if(data.posts.toString()!='')
+              {
+                this.posts = data.posts;
+                
+                //console.log('Categories_id:'+this.CategoriaId+'POST:',this.posts)
+                this.loadingPosts = false;
+              }else{
+                this.msj = 'No hay Posts en esta categoria...'
+                this.loadingPosts = false;
+              }
+            }
+          );
+          
+        }
+  }
+
   openDialog() {
-    const dialogRef = this.dialog.open(DialogContentDialog);
+    
+    const dialogRef = this.dialog.open(DialogContentDialog,{data:{category_id:this.CategoriaId}});
+    
     dialogRef.afterClosed().subscribe(result => {
       if(result){
-        
+        let now = new Date();
+        console.log(); 
           this.post.addPost(dialogRef.componentInstance.title.value,
           dialogRef.componentInstance.descr.value,
           dialogRef.componentInstance.url_img.value,
           this.CategoriaId,
           '1',
-          '2018-11-16',
-          '2018-11-16',
+          formatDate(now, 'yyyy-MM-dd H:mm:ss', 'en-US', '+0000'),
+          formatDate(now, 'yyyy-MM-dd H:mm:ss', 'en-US', '+0000'),
           dialogRef.componentInstance.content.value,
           dialogRef.componentInstance.price.value
           ).subscribe(data => {
           this.res = data.message;
           console.log('info=',this.res);
         });
-      
-
+        //this.router.navigate(['/posts',{"id":this.CategoriaId,"titulo":this.titulo}], { skipLocationChange: true });
+        this.getPosts();
       }else{
         console.log('No se guarda');
       }
@@ -109,8 +118,12 @@ export class MyErrorStateMatcher implements ErrorStateMatcher {
 
 export class DialogContentDialog {
 
-  constructor() { }
+  constructor(@Inject(MAT_DIALOG_DATA) public data: any) {
 
+    this.category_id = data.category_id;
+   }
+
+  public category_id;
   commonValidation = [
     Validators.required
     ,Validators.minLength(6)
@@ -193,7 +206,7 @@ export class DialogContentDialog {
      // console.log('url_img NO es valido...');
     }
     //Precio
-    if(!this.price.hasError('minlength') && !this.price.hasError('required') && !this.price.hasError('whitespace')&& !this.price.hasError('pattern'))
+    if((this.category_id != 2) || !this.price.hasError('minlength') && !this.price.hasError('required') && !this.price.hasError('whitespace')&& !this.price.hasError('pattern'))
     {
       this.priceValid = true;
       //console.log('price es valido...');

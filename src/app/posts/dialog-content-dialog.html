@@ -38,7 +38,7 @@
                 Url de la imagen es un campo <strong>obligatorio</strong>.
               </mat-error>
             </mat-form-field>
-            <mat-form-field>
+            <mat-form-field *ngIf="category_id==2">
               <input  (change)="validando()"  matInput placeholder="Precio" [formControl]="price"
               [errorStateMatcher]="matcher">
             <mat-error *ngIf="!price.hasError('minLength(7)') || !price.hasError('required') && price.hasError('whitespace')">

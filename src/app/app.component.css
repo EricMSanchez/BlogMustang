@@ -1,11 +1,8 @@
-html, body {
-    height: 100%;
-}
 
 /* CSS only for examples not required for centering */
 
 
 #mainContainer {
-    min-width: 100vw;
+    min-width: 99vw;
     min-height: 100vh;
   }

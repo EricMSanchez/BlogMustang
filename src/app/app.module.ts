@@ -63,6 +63,11 @@ import { PostsService } from './posts.service';
           path :'',
           component:HomeComponent,
           data: { animation: 'home' }
+        },
+        {
+          path :'post',
+          component:PostComponent,
+          data: { animation: 'post' }
         }
       ]
     ),
