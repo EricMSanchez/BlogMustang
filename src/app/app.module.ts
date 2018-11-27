@@ -19,7 +19,8 @@ import { HttpClientModule } from '@angular/common/http'
 import { FormsModule,ReactiveFormsModule} from '@angular/forms'
 import { ErrorStateMatcher, ShowOnDirtyErrorStateMatcher } from '@angular/material';
 import { PostsService } from './posts.service';
-
+import { NgxEditorModule } from 'ngx-editor';
+import { TooltipModule } from 'ngx-bootstrap/tooltip';
 //import {MatDialog} from '@angular/material/dialog';
 //import {BehaviorSubject} from '../../node_modules/rxjs'
 @NgModule({
@@ -36,6 +37,8 @@ import { PostsService } from './posts.service';
   ],
   entryComponents:[DialogContentDialog],
   imports: [
+    TooltipModule.forRoot(),
+    NgxEditorModule, 
     FormsModule,
     NgbModule,
     BrowserModule,

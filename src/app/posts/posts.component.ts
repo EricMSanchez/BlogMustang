@@ -14,8 +14,16 @@ import {MAT_DIALOG_DATA} from '@angular/material';
   styleUrls: ['./posts.component.css']
 })
 export class PostsComponent implements OnInit {
- 
-  constructor(public dialog: MatDialog,private route: ActivatedRoute,private post:PostsService,private router: Router) { }
+
+  constructor(public dialog: MatDialog,
+    private route: ActivatedRoute,
+    private post:PostsService,
+    private router: Router) { 
+
+  }
+
+
+
 
   public CategoriaId;
   public titulo;
@@ -36,6 +44,11 @@ export class PostsComponent implements OnInit {
   isPosts(){
     //console.log('cargando posts',this.loadingPosts);
     return this.loadingPosts;
+  }
+
+
+  toPost(posts_id,title,image_url,body){
+    this.router.navigate(['/post',{"posts_id":posts_id,"title":title,"image_url":image_url,"body":body,"category":this.titulo,"cat_id":this.CategoriaId}], { skipLocationChange: true });
   }
 
   getPosts(){
@@ -74,7 +87,7 @@ export class PostsComponent implements OnInit {
           '1',
           formatDate(now, 'yyyy-MM-dd H:mm:ss', 'en-US', '+0000'),
           formatDate(now, 'yyyy-MM-dd H:mm:ss', 'en-US', '+0000'),
-          dialogRef.componentInstance.content.value,
+          dialogRef.componentInstance.content,
           dialogRef.componentInstance.price.value
           ).subscribe(data => {
           this.res = data.message;
@@ -117,10 +130,32 @@ export class MyErrorStateMatcher implements ErrorStateMatcher {
 })
 
 export class DialogContentDialog {
-
+  editorConfig =null;
+ 
   constructor(@Inject(MAT_DIALOG_DATA) public data: any) {
 
     this.category_id = data.category_id;
+    this.editorConfig = {
+      "editable": true,
+      "spellcheck": true,
+      "height": "20em",
+      "minHeight": "0",
+      "width": "auto",
+      "minWidth": "0",
+      "translate": "yes",
+      "enableToolbar": true,
+      "showToolbar": true,
+      "placeholder": "Ingresa el texto aqui...",
+      "imageEndPoint": "api/BlogAPI/posts/uploadImage.json",
+      "toolbar": [
+          ["bold", "italic", "underline", "strikeThrough", "superscript", "subscript"],
+          ["fontName", "fontSize", "color"],
+          ["justifyLeft", "justifyCenter", "justifyRight", "justifyFull", "indent", "outdent"],
+          ["cut", "copy", "delete", "removeFormat", "undo", "redo"],
+          ["paragraph", "blockquote", "removeBlockquote", "horizontalLine", "orderedList", "unorderedList"],
+          ["link", "unlink", "image"]
+      ]
+  }
    }
 
   public category_id;
@@ -148,7 +183,7 @@ export class DialogContentDialog {
   public descr = new FormControl('', this.commonValidation);
   public url_img = new FormControl('',this.urlValidation);
   public price = new FormControl('',this.priceValidation);
-  public content = new FormControl('', this.commonValidation);
+  public content; //new FormControl('', this.commonValidation);
 
   titleValid = false;
   descrValid = false;
@@ -174,7 +209,7 @@ export class DialogContentDialog {
     this.descr.setValue(this.descr.value.trim());
     this.url_img.setValue(this.url_img.value.trim());
     this.price.setValue(this.price.value.trim());
-    this.content.setValue(this.content.value.trim());
+    //this.content.setValue(this.content.value.trim());
 
 
 
@@ -215,10 +250,10 @@ export class DialogContentDialog {
      // console.log('price NO es valido...');
     }
     //Contenido
-    if(!this.content.hasError('minlength') && !this.content.hasError('required') && !this.content.hasError('whitespace')&& !this.content.hasError('pattern'))
+    if(this.content != null)
     {
       this.contentValid = true;
-     // console.log('content es valido...');
+      //console.log('CONTENIDO:',this.content);
     }else{
       this.contentValid = false;
      // console.log('content NO es valido...');

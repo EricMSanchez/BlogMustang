@@ -48,16 +48,11 @@
               Precio es un campo <strong>obligatorio</strong>.
             </mat-error>
             </mat-form-field>
-            <mat-form-field>
-                <textarea  (change)="validando()"  matInput rows="5" matInput placeholder="Contenido" [formControl]="content"
-              [errorStateMatcher]="matcher"></textarea>
-            <mat-error *ngIf="!content.hasError('minLength(15)') || !content.hasError('required') && content.hasError('whitespace')">
-              Favor de agergar un contenido con mas de 15 caracteres.
-            </mat-error>
-            <mat-error *ngIf="content.hasError('required')">
-              Contenido es un campo <strong>obligatorio</strong>.
-            </mat-error>
-            </mat-form-field>
+   
+                <app-ngx-editor (change)="validando()" [config]="editorConfig" [(ngModel)]="content"></app-ngx-editor>
+                <!--textarea  (change)="validando()"  matInput rows="5" matInput placeholder="Contenido" [formControl]="content"
+              [errorStateMatcher]="matcher"></textarea-->
+
           </div>
           
       </mat-dialog-content>
