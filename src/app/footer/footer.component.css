@@ -1,0 +1,22 @@
+.fb {
+    background-color: 	#3b5998;
+
+}
+
+.fb:hover{
+    background-color: 	#29437c;
+}
+
+.yt{
+    background-color: 	#FF0000;
+
+}
+
+
+.yt:hover{
+    background-color: 	rgb(179, 0, 0);
+}
+
+.dark-color{
+    background-color: #222222;
+}

@@ -5,11 +5,9 @@ import { Component, OnInit } from '@angular/core';
   templateUrl: './dialog-content.component.html',
   styleUrls: ['./dialog-content.component.css']
 })
-export class DialogContentComponent implements OnInit {
+export class DialogContentComponent {
 
   constructor() { }
 
-  ngOnInit() {
-  }
 
 }

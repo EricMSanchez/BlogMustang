@@ -133,7 +133,8 @@ export class DialogContentDialog {
   editorConfig =null;
  
   constructor(@Inject(MAT_DIALOG_DATA) public data: any) {
-
+//"imageEndPoint": "api/BlogAPI/posts/uploadImage.json",
+/* Solo activar cuando se tenga que subir una imagen para los post... */
     this.category_id = data.category_id;
     this.editorConfig = {
       "editable": true,
@@ -146,7 +147,7 @@ export class DialogContentDialog {
       "enableToolbar": true,
       "showToolbar": true,
       "placeholder": "Ingresa el texto aqui...",
-      "imageEndPoint": "api/BlogAPI/posts/uploadImage.json",
+      "imageEndPoint": "",
       "toolbar": [
           ["bold", "italic", "underline", "strikeThrough", "superscript", "subscript"],
           ["fontName", "fontSize", "color"],

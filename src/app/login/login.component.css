@@ -1,0 +1,11 @@
+
+.logo{
+    /*background-image: url("../../assets/img/mustang3.png");*/
+    background-position: center; /* Center the image */
+    background-repeat: no-repeat; /* Do not repeat the image */
+    background-size: contain; /* Resize the background image to cover the entire container */
+}
+
+p{
+    font-size: .9em
+}

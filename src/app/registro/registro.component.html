@@ -1,0 +1,173 @@
+<div class="container mb-5">
+
+    <a  routerLink="/"> <b>Categorias</b></a>
+    <br><br>
+  <h1>Registro de usuario</h1>
+  <br>
+  
+    
+  <p><b>Datos de registro</b></p>
+  <br>
+  <form [formGroup]="form" >
+      <div class="example-container mb-3">
+    <mat-form-field appearance="legacy">
+      <mat-label>Nombre</mat-label>
+      <input matInput placeholder="Nombre" formControlName="nombre" [errorStateMatcher]="matcher" autocomplete="off"  required cdkFocusInitial>
+      <mat-error *ngIf="form.get('nombre').hasError('required')" >El <b>Nombre</b> es un campo obligatorio.</mat-error>
+    </mat-form-field>
+
+    <mat-form-field  appearance="legacy" >
+      <input matInput #input placeholder="Apellido" formControlName="apellido" autocomplete="off"  required [errorStateMatcher]="matcher">
+      <mat-error *ngIf="form.get('apellido').hasError('required')" >El <b>Apellido</b> es un campo obligatorio.</mat-error>
+    </mat-form-field>
+    <mat-form-field>
+        <input matInput placeholder="Email" formControlName="email" autocomplete="off" required email>
+        <mat-error *ngIf="form.get('email').hasError('email') || form.get('email').hasError('required') || form.get('email').hasError('pattern') || form.get('email').hasError('emailValid')" [innerHTML]="getErrorMessage(form.get('email'))" ></mat-error>
+    </mat-form-field>
+    
+    <mat-form-field  appearance="legacy" >
+      <input matInput #input placeholder="Usuario" formControlName="usuario" autocomplete="off"  [errorStateMatcher]="matcher" required>
+      <!--mat-hint align="end">{{input.value?.length || 0}}/10</mat-hint-->
+      <mat-hint class="ac-form-field-description">De 4 a 24 caracteres.</mat-hint>
+      <mat-error *ngIf="form.get('usuario').hasError('required')">
+          El campo de <b>Usuario</b> es obligatorio.
+      </mat-error>
+      <mat-error *ngIf="form.get('usuario').hasError('minlength')">
+        <b>Usuario</b> con menos de 4 caracteres.
+      </mat-error>
+      <mat-error *ngIf="form.get('usuario').hasError('maxlength')">
+        <b>Usuario</b> con mas de 24 caracteres.
+      </mat-error>
+      <mat-error *ngIf="form.get('usuario').hasError('usrValid')">
+        El <b>Usuario</b> ingresado ya se encuentra registrado!
+    </mat-error>
+    </mat-form-field>
+
+    <mat-form-field  appearance="legacy" >
+      <input matInput placeholder="Password" [type]="hide ? 'password' : 'text'" formControlName="password" required>
+      <mat-icon matSuffix (click)="hide = !hide">{{hide ? 'visibility_off' : 'visibility'}}</mat-icon>
+      <mat-hint class="ac-form-field-description">De 6 a 24 caracteres.</mat-hint>
+      <mat-error *ngIf="form.get('password').hasError('required')">
+          Password es obligatorio.
+      </mat-error>
+      <mat-error *ngIf="form.get('password').hasError('minlength')">
+          Password con menos de 6 caracteres.
+      </mat-error>
+      <mat-error *ngIf="form.get('password').hasError('maxlength')">
+          Password con mas de 24 caracteres.
+      </mat-error>
+    </mat-form-field>
+
+    <mat-form-field  appearance="legacy" >
+      
+      <input matInput placeholder="Confirmar Password" [type]="hide ? 'password' : 'text'" required formControlName="passwordConfirm" [errorStateMatcher]="passwordsMatcher">
+      <mat-icon matSuffix (click)="hide = !hide">{{hide ? 'visibility_off' : 'visibility'}}</mat-icon>
+      <mat-hint class="ac-form-field-description">De 6 a 24 caracteres.</mat-hint>
+      <mat-error *ngIf="form.hasError('passwordsNotEqual')" >Las contraseñas no coinciden!</mat-error>
+    </mat-form-field>
+  
+<br>
+    <p><b>Direccion</b></p>
+<br>
+<mat-form-field appearance="legacy">
+    <mat-label>Calle</mat-label>
+    <input matInput placeholder="Calle" formControlName="calle" autocomplete="off"  [errorStateMatcher]="matcher" required>
+    <mat-error *ngIf="form.get('calle').hasError('required')" >La <b>Calle</b> es un campo obligatorio.</mat-error>
+</mat-form-field>
+<mat-form-field appearance="legacy">
+  <mat-label>Numero Exterior</mat-label>
+  <input matInput placeholder="Numero" formControlName="numeroExt" autocomplete="off"  [errorStateMatcher]="matcher" required>
+  <mat-error *ngIf="form.get('numeroExt').hasError('required')" >El <b>Numero Exterior</b> es un campo obligatorio.</mat-error>
+</mat-form-field>
+<mat-form-field appearance="legacy">
+    <mat-label>Colonia</mat-label>
+    <input matInput placeholder="Colonia" formControlName="colonia" autocomplete="off"  [errorStateMatcher]="matcher" required>
+    <mat-error *ngIf="form.get('colonia').hasError('required')" >La <b>Colonia</b> es un campo obligatorio.</mat-error>
+</mat-form-field>
+<mat-form-field appearance="legacy">
+    <mat-label>Pais</mat-label>
+    <input matInput placeholder="Pais" formControlName="pais" autocomplete="off"  [errorStateMatcher]="matcher" required>
+    <mat-error *ngIf="form.get('pais').hasError('required')" >El <b>Pais</b> es un campo obligatorio.</mat-error>
+</mat-form-field>
+<mat-form-field appearance="legacy">
+    <mat-label>Estado</mat-label>
+    <input matInput placeholder="Estado" formControlName="estado" autocomplete="off"  [errorStateMatcher]="matcher" required>
+    <mat-error *ngIf="form.get('estado').hasError('required')" >El <b>Estado</b> es un campo obligatorio.</mat-error>
+</mat-form-field>
+<mat-form-field appearance="legacy">
+    <mat-label>Ciudad</mat-label>
+    <input matInput placeholder="Ciudad" formControlName="ciudad" autocomplete="off"  [errorStateMatcher]="matcher" required>
+    <mat-error *ngIf="form.get('ciudad').hasError('required')" >La <b>Ciudad</b> es un campo obligatorio.</mat-error>
+</mat-form-field>
+<div class="form-field">
+    <mat-checkbox name="acceptTerms" formControlName="acceptTerms">Acepto los <a href="https://policies.google.com/terms?hl=es" target="about-blank">términos y condiciones</a></mat-checkbox>
+</div>
+<div class="form-field">
+    <mat-error *ngIf="form.hasError('passwordsNotEqual')" >Las contraseñas no coinciden, favor de corregir para poder llevar a cabo el registro.</mat-error>
+</div>
+
+<div class="form-bottom">
+<button mat-raised-button (click)="saveUsuario()" [disabled]="!form.valid">Crear mi Usuario</button>
+</div>
+</div>
+<p>
+        <ngb-alert *ngIf="(!usuarioValido || !emailValido) || !staticAlertClosed" dismissible = "true" type="danger" [innerHTML]="mensaje" (close)="staticAlertClosed = true"></ngb-alert>
+</p>
+
+</form>
+
+<div class="d-flex flex-row-reverse bd-highlight">
+    <div class="p-2 bd-highlight">
+      <p>
+        <button  mat-raised-button routerLink="/">Regresar a categorias</button>
+      </p>
+    </div>
+  </div>
+</div>
+
+<!----------------------------------------------------------------------
+
+<form [formGroup]="form" (ngSubmit)="submitAccount(form)">
+    <div class="form-content">
+        <div class="form-field">
+            <mat-form-field>
+            <input matInput formControlName="email" placeholder="Email">
+            <mat-error *ngIf="form.get('email').hasError('required')">
+                E-mail is mandatory.
+            </mat-error>
+            <mat-error *ngIf="form.get('email').hasError('email')">
+                Incorrect E-mail.
+            </mat-error>
+            </mat-form-field>
+        </div>
+        <div class="form-field">
+            <mat-form-field>
+            <input matInput formControlName="password" placeholder="Password" type="password">
+            <mat-hint class="ac-form-field-description">Between 6 and 24 characters.</mat-hint>
+            <mat-error *ngIf="form.get('password').hasError('required')">
+                Password is mandatory.
+            </mat-error>
+            <mat-error *ngIf="form.get('password').hasError('minlength')">
+                Password with less than 6 characters.
+            </mat-error>
+            <mat-error *ngIf="form.get('password').hasError('maxlength')">
+                Password with more than 24 characters.
+            </mat-error>
+            </mat-form-field>
+        </div>
+        <div class="form-field">
+            <mat-form-field>
+            <input matInput formControlName="passwordAgain" placeholder="Confirm the password" type="password" [errorStateMatcher]="passwordsMatcher">
+            <mat-error *ngIf="form.hasError('passwordsNotEqual')" >Passwords are different. They should be equal!</mat-error>
+            </mat-form-field>
+        </div>
+        <div class="form-field">
+            <mat-checkbox name="acceptTerms" formControlName="acceptTerms">I accept terms and conditions</mat-checkbox>
+        </div>
+    </div>
+    <div class="form-bottom">
+        <button mat-raised-button [disabled]="!form.valid">Create Account</button>
+    </div>
+</form>
+
+----->

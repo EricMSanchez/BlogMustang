@@ -31,6 +31,8 @@ export class PostComponent implements OnInit {
     this.body = this.route.snapshot.paramMap.get('body');
     this.category = this.route.snapshot.paramMap.get('category');
     this.categoryId = this.route.snapshot.paramMap.get('cat_id');
+    this.body = this.body.replace('<img ', '<img class="img-fluid" ');
+    console.log('',this.body);
     this.myStyle =
       this._sanitizer.bypassSecurityTrustHtml(this.body);
 

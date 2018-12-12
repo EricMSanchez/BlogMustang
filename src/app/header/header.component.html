@@ -6,8 +6,8 @@
           <img src="//placehold.it/50" class="rounded-circle" />
       </div>
       <div class="col-8 d-flex justify-content-end align-items-center">
-          <a class="btn btn-sm btn-outline-secondary" href="#">Registro</a>
-          <a class="btn btn-sm btn-outline-secondary ml-1" href="#">Iniciar Sesion</a>
+          <button mat-raised-button routerLink="" (click)="toRegistro()"><fa-icon [icon]="['fa', 'user-plus']"></fa-icon> Registro</button>
+          <button mat-raised-button (click)="openDialog()" class="ml-1" routerLink=""><fa-icon [icon]="['fa', 'sign-in-alt']"></fa-icon> Iniciar Sesion</button>
       </div>
 
     </div>

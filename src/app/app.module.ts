@@ -21,6 +21,9 @@ import { ErrorStateMatcher, ShowOnDirtyErrorStateMatcher } from '@angular/materi
 import { PostsService } from './posts.service';
 import { NgxEditorModule } from 'ngx-editor';
 import { TooltipModule } from 'ngx-bootstrap/tooltip';
+import { LoginComponent } from './login/login.component';
+import { RegistroComponent } from './registro/registro.component';
+import { FooterComponent } from './footer/footer.component';
 //import {MatDialog} from '@angular/material/dialog';
 //import {BehaviorSubject} from '../../node_modules/rxjs'
 @NgModule({
@@ -33,7 +36,10 @@ import { TooltipModule } from 'ngx-bootstrap/tooltip';
     DialogContentDialog,
     HomeComponent,
     CalificaComponent,
-    PostComponent
+    PostComponent,
+    LoginComponent,
+    RegistroComponent,
+    FooterComponent
   ],
   entryComponents:[DialogContentDialog],
   imports: [
@@ -53,6 +59,10 @@ import { TooltipModule } from 'ngx-bootstrap/tooltip';
     RouterModule.forRoot(
       [
         {
+          path:'content',
+          component:DialogContentComponent
+        },
+        {
           path:'posts',
           component:PostsComponent,
           data: { animation: 'posts' }
@@ -71,6 +81,16 @@ import { TooltipModule } from 'ngx-bootstrap/tooltip';
           path :'post',
           component:PostComponent,
           data: { animation: 'post' }
+        },
+        {
+          path: 'login',
+          component:LoginComponent,
+          data: {animation:'login'}
+        },
+        {
+          path: 'registro',
+          component:RegistroComponent,
+          data: {animation:'registro'}
         }
       ]
     ),
