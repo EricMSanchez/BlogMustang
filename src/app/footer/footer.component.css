@@ -12,11 +12,23 @@
 
 }
 
-
 .yt:hover{
     background-color: 	rgb(179, 0, 0);
 }
 
+.ct{
+    background-color: 	#222222;
+
+}
+
+.ct:hover{
+    background-color: 	rgb(49, 47, 47);
+}
+
 .dark-color{
     background-color: #222222;
+}
+
+.bottom{
+    bottom:0;
 }

@@ -1,6 +1,6 @@
 <div class="container mb-5">
-
-    <a  routerLink="/"> <b>Categorias</b></a>
+    
+    <a  routerLink="/"> <b>Categorias </b></a> <fa-icon [icon]="['fas', 'arrow-right']" ></fa-icon> <b> Registro</b>
     <br><br>
   <h1>Registro de usuario</h1>
   <br>
@@ -12,12 +12,12 @@
       <div class="example-container mb-3">
     <mat-form-field appearance="legacy">
       <mat-label>Nombre</mat-label>
-      <input matInput placeholder="Nombre" formControlName="nombre" [errorStateMatcher]="matcher" autocomplete="off"  required cdkFocusInitial>
+      <input matInput placeholder="Nombre" formControlName="nombre"  autocomplete="off"  required cdkFocusInitial>
       <mat-error *ngIf="form.get('nombre').hasError('required')" >El <b>Nombre</b> es un campo obligatorio.</mat-error>
     </mat-form-field>
 
     <mat-form-field  appearance="legacy" >
-      <input matInput #input placeholder="Apellido" formControlName="apellido" autocomplete="off"  required [errorStateMatcher]="matcher">
+      <input matInput #input placeholder="Apellido" formControlName="apellido" autocomplete="off"  required >
       <mat-error *ngIf="form.get('apellido').hasError('required')" >El <b>Apellido</b> es un campo obligatorio.</mat-error>
     </mat-form-field>
     <mat-form-field>
@@ -26,7 +26,7 @@
     </mat-form-field>
     
     <mat-form-field  appearance="legacy" >
-      <input matInput #input placeholder="Usuario" formControlName="usuario" autocomplete="off"  [errorStateMatcher]="matcher" required>
+      <input matInput #input placeholder="Usuario" formControlName="usuario" autocomplete="off" required>
       <!--mat-hint align="end">{{input.value?.length || 0}}/10</mat-hint-->
       <mat-hint class="ac-form-field-description">De 4 a 24 caracteres.</mat-hint>
       <mat-error *ngIf="form.get('usuario').hasError('required')">
@@ -71,32 +71,33 @@
 <br>
 <mat-form-field appearance="legacy">
     <mat-label>Calle</mat-label>
-    <input matInput placeholder="Calle" formControlName="calle" autocomplete="off"  [errorStateMatcher]="matcher" required>
+    <input matInput placeholder="Calle" formControlName="calle" autocomplete="off"   required>
     <mat-error *ngIf="form.get('calle').hasError('required')" >La <b>Calle</b> es un campo obligatorio.</mat-error>
 </mat-form-field>
+
 <mat-form-field appearance="legacy">
   <mat-label>Numero Exterior</mat-label>
-  <input matInput placeholder="Numero" formControlName="numeroExt" autocomplete="off"  [errorStateMatcher]="matcher" required>
+  <input matInput placeholder="Numero" formControlName="numeroExt" autocomplete="off"   required>
   <mat-error *ngIf="form.get('numeroExt').hasError('required')" >El <b>Numero Exterior</b> es un campo obligatorio.</mat-error>
 </mat-form-field>
 <mat-form-field appearance="legacy">
     <mat-label>Colonia</mat-label>
-    <input matInput placeholder="Colonia" formControlName="colonia" autocomplete="off"  [errorStateMatcher]="matcher" required>
+    <input matInput placeholder="Colonia" formControlName="colonia" autocomplete="off"   required>
     <mat-error *ngIf="form.get('colonia').hasError('required')" >La <b>Colonia</b> es un campo obligatorio.</mat-error>
 </mat-form-field>
 <mat-form-field appearance="legacy">
     <mat-label>Pais</mat-label>
-    <input matInput placeholder="Pais" formControlName="pais" autocomplete="off"  [errorStateMatcher]="matcher" required>
+    <input matInput placeholder="Pais" formControlName="pais" autocomplete="off" required>
     <mat-error *ngIf="form.get('pais').hasError('required')" >El <b>Pais</b> es un campo obligatorio.</mat-error>
 </mat-form-field>
 <mat-form-field appearance="legacy">
     <mat-label>Estado</mat-label>
-    <input matInput placeholder="Estado" formControlName="estado" autocomplete="off"  [errorStateMatcher]="matcher" required>
+    <input matInput placeholder="Estado" formControlName="estado" autocomplete="off" required>
     <mat-error *ngIf="form.get('estado').hasError('required')" >El <b>Estado</b> es un campo obligatorio.</mat-error>
 </mat-form-field>
 <mat-form-field appearance="legacy">
     <mat-label>Ciudad</mat-label>
-    <input matInput placeholder="Ciudad" formControlName="ciudad" autocomplete="off"  [errorStateMatcher]="matcher" required>
+    <input matInput placeholder="Ciudad" formControlName="ciudad" autocomplete="off" required>
     <mat-error *ngIf="form.get('ciudad').hasError('required')" >La <b>Ciudad</b> es un campo obligatorio.</mat-error>
 </mat-form-field>
 <div class="form-field">

@@ -1,29 +1,38 @@
 <div class="logo">
 <div class="container">
 <h1 mat-dialog-title><fa-icon [icon]="['fa', 'user-lock']"></fa-icon> Inicio de sesion</h1>
+<form (keydown)="keyDownFunction($event)">
 <div mat-dialog-content>
     <p>{{instrucciones}}</p>
   <div class="example-container">
      
     <mat-form-field >
-        <input matInput #input  placeholder="Usuario" [formControl]="user" [errorStateMatcher]="matcher" cdkFocusInitial>
+        <input matInput #input  placeholder="Usuario" [formControl]="user"  cdkFocusInitial>
         <!--mat-hint align="end">{{input.value?.length || 0}}/10</mat-hint-->
     </mat-form-field>
     <mat-form-field>
-      <input matInput placeholder="Password" [formControl]="password" [errorStateMatcher]="matcher" [type]="hide ? 'password' : 'text'">
+      <input matInput placeholder="Password" [formControl]="password"  [type]="hide ? 'password' : 'text'">
       <mat-icon matSuffix (click)="hide = !hide">{{hide ? 'visibility_off' : 'visibility'}}</mat-icon>
     </mat-form-field>
- 
+    <div class="row justify-content-center"> 
+      <a class="my-1" (click)="toForgot()" routerLink="/forgotPassword" >Olvide mi contraseña</a>
+    </div>  
 </div>
   <mat-dialog-content class="mat-typography">
     <p style="white-space: pre-line"><b>Nota:</b>{{mensaje}}</p>
   </mat-dialog-content>
+
 </div>
+</form>
 <br>
   <mat-dialog-actions align="end">
-      <button mat-raised-button mat-dialog-close>Cancelar</button>
-      <button mat-raised-button mat-dialog-close routerLink="" (click)="toRegistro()">Registro</button>
-      <button mat-raised-button (click)="logIn()" [mat-dialog-close]="true" >Iniciar Sesion</button>
+    <div class="container">
+    <div class="d-flex flex-column-reverse flex-md-row"> 
+    <button mat-raised-button mat-dialog-close (click)="toCancelar()">Cancelar</button>
+    <button mat-raised-button mat-dialog-close routerLink="" (click)="toRegistro()">Registro</button>
+    <button mat-raised-button (click)="logIn()">Iniciar Sesion</button>
+    </div>  
+  </div>
   </mat-dialog-actions>
 </div>
 </div>

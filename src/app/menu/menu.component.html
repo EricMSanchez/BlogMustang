@@ -11,9 +11,9 @@
         
        
           <div  *ngFor="let result of results;" class="col-12 col-md-4" style="margin-bottom:2em">
-            <div (click)="toPosts(result.categories_id,result.title)" id="{{result.categories_id}}"  class="card list-group-item-action" >
+            <div (click)="toPosts(result.categories_id,result.title,result.route)" id="{{result.categories_id}}"  class="card list-group-item-action" >
               <div class="text-center">
-                <img class="card-img-top" [src]="result.Imagen" onError="src='../../assets/img/default.png'" alt="Card image cap" style="margin-top: 1rem">
+                <img class="card-img-top" [src]="result.Imagen" onError="src='assets/img/error.png'" alt="Card image cap" style="margin-top: 1rem">
               </div>
             <div class="card-body ">
                 <div class="text-center">

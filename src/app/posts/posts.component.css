@@ -8,9 +8,19 @@
 }
 
     
-    .mine{
-      position: fixed;
-        bottom: 40px;
-        right: 20px;
-    }
-    
+.mine{
+  position: fixed;
+  bottom: 40px;
+  right: 20px;
+}
+
+.bt {
+  background-color: 	#212529;
+}
+
+.bt:hover{
+  background-color: 	#32373b;
+}
+.check{
+  color: green;
+}

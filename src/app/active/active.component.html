@@ -1,0 +1,15 @@
+<div class="container">
+  <div *ngIf="!error&&!activo" class="text-center">
+    <fa-icon [icon]="['fas', 'cog']" [pulse]="true" size="3x"></fa-icon>
+    <h3>Activando...</h3>
+  </div>
+  <div *ngIf="activo" class="text-center">
+    <fa-icon [icon]="['fas', 'user-check']"  size="3x"></fa-icon>
+    <h3>{{msg}}</h3>
+    <p>Bienvenido... Ya puedes iniciar sesion!</p>
+    <p>Solo tienes que hacer click en Iniciar Sesion en el boton de la parte superior.</p>
+  </div>
+  <div *ngIf="error" class="text-center">
+    <h3>Ocurrio un problema...</h3>
+  </div>
+</div>

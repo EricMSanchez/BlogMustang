@@ -1,13 +1,14 @@
 import { Component, OnInit,Output,EventEmitter,Input  } from '@angular/core';
 import {trigger,style,transition,animate, state} from '@angular/animations';
-import { RouterLink,Router } from '@angular/router';
+import { RouterLink,Router, ActivatedRoute } from '@angular/router';
 import { routerNgProbeToken } from '@angular/router/src/router_module';
 import { slideInAnimation } from '../animations';
 import { MenuService } from '../menu.service';
 import { fas } from '@fortawesome/free-solid-svg-icons';
 //import { far } from '@fortawesome/free-regular-svg-icons';
 import { library } from '@fortawesome/fontawesome-svg-core';
-
+import { AuthService } from '../auth.service';
+import { EventEmiterService } from '../event-emiter.service';
 
 library.add(fas);
 @Component({
@@ -21,34 +22,46 @@ library.add(fas);
 
 export class MenuComponent implements OnInit {
 
-  isOpen = true;
+  //isOpen = true;
 
   
-  @Output() showMenu = new EventEmitter<boolean>();
+  @Output() openLogin = new EventEmitter<boolean>();
 
-  @Input() isVisibleMenu = true;
   async  delay(ms: number) {
     return new Promise( resolve => setTimeout(resolve, ms) );
   }
 
   results = null;
-  constructor(private router: Router,private menuService:MenuService) { }
+  constructor(private router: Router,
+    private menuService:MenuService,
+    private route:ActivatedRoute,
+    private auth:AuthService,
+    private _eventEmiter: EventEmiterService) { }
 
   ngOnInit() {
-    this.menuService.getCategories().subscribe(data => {
-      this.results = data.categories;
-      //console.log('info=',this.results);
-    });
-   
+    this.getCategories();
+   this.setCategoriesEmiter();
   }
 
-    async toPosts(id,titulo) {
-      if(id == '6'){
-        this.router.navigate(['/califica',{"id":id,"titulo":titulo}], { skipLocationChange: true });
-      }else
+  getCategories(){
+    this.menuService.getActiveCategories(this.auth.getUser().token).subscribe(data => {
+      this.results = data.categories;
+
+      //console.log('info=',this.results);
+    });
+  }
+
+  setCategoriesEmiter() {
+    this._eventEmiter.categoriesEmitter.subscribe(data => {
+      if(data)
       {
-        this.router.navigate(['/posts',{"id":id,"titulo":titulo}], { skipLocationChange: true });
+        this.getCategories();
       }
+    })
+  }
+
+    async toPosts(id,titulo,route) {
+        this.router.navigate(['/'+route,{"id":id,"titulo":titulo}], { skipLocationChange: false });
   }
 
   /*

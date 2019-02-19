@@ -1,0 +1,33 @@
+<div class="container">
+    <a  routerLink="/"> <b>Categorias </b> </a> <fa-icon [icon]="['fas', 'arrow-right']" ></fa-icon> <b>Contacto</b>
+    <br>
+
+    <div> 
+  <form>
+    <div class="form-group">
+      <label for="exampleFormControlSelect1">Asunto:</label>
+      <select [(ngModel)]="asunto" name="asunto" class="form-control" id="exampleFormControlSelect1">
+        <option value="Queja">Queja</option>
+        <option value="Comentario">Comentario/Sugerencia</option>
+        <option value="Otro">Otro</option>
+      </select>
+    </div>
+    <div class="form-group">
+      <label for="exampleFormControlTextarea1">Escribe aqui tu Comentario/Queja/Sugerencia:</label>
+      <textarea [(ngModel)]="comment" name="comment" class="form-control" id="exampleFormControlTextarea1" rows="3"></textarea>
+    </div>
+  </form>
+  <div class="row justify-content-md-end">
+    <a mat-fab  class="btn btn-primary bt m-2"  matTooltip="Calificar" (click)="sendFeedBack()" >
+        <fa-icon [icon]="['fa', 'check']"></fa-icon>
+    </a>
+</div>
+<div class="row justify-content-md-center">
+  <div class="text-center" *ngIf="enviando">
+        <fa-icon [icon]="['fas', 'cog']" [pulse]="true" size="3x"></fa-icon>
+        <h3>Enviando</h3>
+  </div>
+  <ngb-alert class="my-1" style="position:absolute;z-index: 999" *ngIf="successMessage" type="{{type}}" (close)="successMessage = null" innerHTML="{{ successMessage }}"></ngb-alert>
+</div>
+</div>
+</div>

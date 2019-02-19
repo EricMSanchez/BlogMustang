@@ -1,0 +1,40 @@
+<div class="container">
+  <a  routerLink="/"> <b>Categorias </b> </a> <fa-icon [icon]="['fas', 'arrow-right']" ></fa-icon> <b> {{titulo}}</b>
+  <br>
+  <div class="row">
+    <div class="col-12">
+      <p>Lista de los post y sus estatus, hacer click en el boton Abrir/Cerrar para cambiar el estatus.</p> 
+    </div>
+  </div>
+  <table class="table table-responsive-sm table-hover text-center">
+      <thead>
+        <tr class="">
+          <th scope="col">Categoria</th>
+          <th scope="col">Titulo</th>
+          <th scope="col">Usuario</th>
+          <th scope="col">Estatus</th>
+          <th scope="col"></th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let post of posts">
+          <th scope="row">{{post.categories.title}}</th>
+          <td>{{post.title}}</td>
+          <td>{{post.users.name}}</td>
+          <td *ngIf="post.status == 'Open'" class="text-center"><fa-icon [icon]="['fa', 'lock-open']"   matTooltip="Abierto"></fa-icon><span></span></td>
+          <td *ngIf="post.status == 'Closed'" class="text-center"><fa-icon [icon]="['fa', 'lock']"   matTooltip="Cerrado"></fa-icon><span></span></td>
+          <td class="text-center">
+            <button *ngIf="post.status == 'Open'" (click)="changePostStatus(post.posts_id,'Closed')" color="warn" matTooltip="Cerrar Post" mat-raised-button  class="ml-1"><fa-icon [icon]="['fa', 'lock']"></fa-icon> <span> Cerrar</span></button>
+            <button *ngIf="post.status == 'Closed'" (click)="changePostStatus(post.posts_id,'Open')" matTooltip="Abrir Post" mat-raised-button class="ml-1"><fa-icon [icon]="['fa', 'lock-open']"></fa-icon> <span> Abrir</span></button>
+          </td>
+        </tr>
+        <!--tr>
+            <th scope="row">Partes No Mustang</th>
+            <td>Mi auto esta descompuesto y no funciona</td>
+            <td>user43p</td>
+            <td class="text-center"><fa-icon [icon]="['fa', 'lock']"  matTooltip="Cerrado"></fa-icon><span></span></td>
+            <td class="text-center"><button *ngIf="true" color="" matTooltip="Abrir Post" mat-raised-button routerLink="" class="ml-1"><fa-icon [icon]="['fa', 'lock-open']"></fa-icon> <span> Abrir</span></button></td>
+          </tr-->
+      </tbody>
+    </table>
+</div>

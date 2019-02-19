@@ -1,0 +1,47 @@
+.bt {
+    background-color: 	#212529;
+}
+
+.bt:hover{
+    background-color: 	#32373b;
+}
+
+.image {
+    display: inline-block;
+    overflow: hidden;
+    position: relative;
+
+}
+
+img {
+    height: 100px;
+    width: 100px;
+}
+
+.label {
+    background: rgba(0, 0, 0, 0.5) none repeat scroll 0 0;
+    bottom: -70px;
+    color: #fff;
+    left: 0;
+    margin: 0;
+    position: absolute;
+    right: 0;
+    text-align: center;
+    transition:0.1s all;
+    width: 150px;
+    height: 35px;
+    font-size: 14px;
+    text-decoration: none;
+    padding-top: 0;
+}
+
+.image:hover .label {
+  bottom: 1px;
+  width: 150px;
+  margin-top: 0;
+}
+
+.label:active { 
+    color: rgb(122, 200, 236);
+    transition:0.3s all;
+  }

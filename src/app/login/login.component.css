@@ -9,3 +9,16 @@
 p{
     font-size: .9em
 }
+
+@media (max-width: 768px) {
+    .mat-raised-button {
+        width: 100% !important;
+        height: 2rem !important;
+        margin-right: 0 !important;
+        margin-left: 0 !important;
+        margin-top: 1% !important;
+      }
+
+
+}
+

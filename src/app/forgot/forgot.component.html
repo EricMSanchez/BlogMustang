@@ -1,0 +1,27 @@
+<div class="container">
+    <a  routerLink="/"> <b>Categorias </b> </a> <fa-icon [icon]="['fas', 'arrow-right']" ></fa-icon> <b> Olvide mi contraseña</b>
+    <br>
+    <br>
+    <div class="row justify-content-start ml-2">
+        <div class="center-text">
+        <p>Favor de ingresar su email y se enviara una liga donde se le indicaran las instrucciones a seguir.</p>
+         </div>
+    </div>
+    <div class="row justify-content-center">
+      <div class="center-text">
+        <mat-form-field >
+          <input matInput #input  placeholder="*Ingresa tu email aqui  " [formControl]="email" cdkFocusInitial>
+        </mat-form-field>
+      </div>
+
+    </div>
+    <div class="row justify-content-end"><button class="mr-5" (click)="sendEmail()" mat-raised-button>Enviar</button></div>
+    <div class="text-center" *ngIf="load">
+        <fa-icon [icon]="['fas', 'cog']" [pulse]="true" size="3x"></fa-icon>
+        <h3>Por favor espere...</h3>
+      </div>
+    <div class="row justify-content-center my-1">
+        <ngb-alert class="my-1" style="position:absolute;z-index: 999" *ngIf="successMessage" type="{{type}}" (close)="successMessage = null">{{ successMessage }}</ngb-alert>
+    </div>
+</div>
+

@@ -1,0 +1,22 @@
+.main{
+    background-color: #222222;
+}
+
+@media (max-width:992px){
+    span{
+        font-size: 0; 
+        overflow: hidden;
+    }
+
+}
+
+.check{
+    color: green;
+}
+.bt {
+    background-color: 	#404142;
+}
+
+.bt:hover{
+    background-color: 	#535455;
+}

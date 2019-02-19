@@ -8,6 +8,7 @@ import { FormControl, FormGroupDirective, NgForm, Validators} from '@angular/for
 import { PostsService } from '../posts.service';
 import {formatDate } from '@angular/common';
 import {MAT_DIALOG_DATA} from '@angular/material';
+import { AuthService } from '../auth.service'
 @Component({
   selector: 'app-posts',
   templateUrl: './posts.component.html',
@@ -18,7 +19,8 @@ export class PostsComponent implements OnInit {
   constructor(public dialog: MatDialog,
     private route: ActivatedRoute,
     private post:PostsService,
-    private router: Router) { 
+    private router: Router,
+    public auth: AuthService) { 
 
   }
 
@@ -46,15 +48,19 @@ export class PostsComponent implements OnInit {
     return this.loadingPosts;
   }
 
-
+//"title":title,"image_url":image_url,"body":body,"category":this.titulo,
   toPost(posts_id,title,image_url,body){
-    this.router.navigate(['/post',{"posts_id":posts_id,"title":title,"image_url":image_url,"body":body,"category":this.titulo,"cat_id":this.CategoriaId}], { skipLocationChange: true });
+    this.router.navigate(['/post',{"posts_id":posts_id,"cat_id":this.CategoriaId}], { skipLocationChange: false });
+  }
+
+  toUser(users_id){
+    this.router.navigate(['/usuario',{"id":users_id}], { skipLocationChange: false });
   }
 
   getPosts(){
     if(this.CategoriaId!=null)
         {
-          this.post.getPostsByCategoriesId(this.CategoriaId).subscribe(
+          this.post.getPostsByCategoriesId(this.CategoriaId,this.auth.getUser().token).subscribe(
             data =>{
               if(data.posts.toString()!='')
               {
@@ -84,17 +90,19 @@ export class PostsComponent implements OnInit {
           dialogRef.componentInstance.descr.value,
           dialogRef.componentInstance.url_img.value,
           this.CategoriaId,
-          '1',
-          formatDate(now, 'yyyy-MM-dd H:mm:ss', 'en-US', '+0000'),
-          formatDate(now, 'yyyy-MM-dd H:mm:ss', 'en-US', '+0000'),
+          '0',
+          formatDate(now, 'yyyy-MM-dd H:mm:ss', 'en-US', '-8000'),
+          formatDate(now, 'yyyy-MM-dd H:mm:ss', 'en-US', '-8000'),
           dialogRef.componentInstance.content,
-          dialogRef.componentInstance.price.value
+          dialogRef.componentInstance.price.value,
+          this.auth.getUser().token
           ).subscribe(data => {
           this.res = data.message;
+          this.getPosts();
           console.log('info=',this.res);
         });
         //this.router.navigate(['/posts',{"id":this.CategoriaId,"titulo":this.titulo}], { skipLocationChange: true });
-        this.getPosts();
+       
       }else{
         console.log('No se guarda');
       }
@@ -133,7 +141,7 @@ export class DialogContentDialog {
   editorConfig =null;
  
   constructor(@Inject(MAT_DIALOG_DATA) public data: any) {
-//"imageEndPoint": "api/BlogAPI/posts/uploadImage.json",
+//"imageEndPoint": "api/API/posts/uploadImage.json",
 /* Solo activar cuando se tenga que subir una imagen para los post... */
     this.category_id = data.category_id;
     this.editorConfig = {
@@ -184,7 +192,7 @@ export class DialogContentDialog {
   public descr = new FormControl('', this.commonValidation);
   public url_img = new FormControl('',this.urlValidation);
   public price = new FormControl('',this.priceValidation);
-  public content; //new FormControl('', this.commonValidation);
+  content; //new FormControl('', this.commonValidation);
 
   titleValid = false;
   descrValid = false;
@@ -203,6 +211,7 @@ export class DialogContentDialog {
 
   ngOnInit() {
     this.valido = false;
+    //this.contentValid = ;
   }
 
   validando(){
@@ -223,6 +232,7 @@ export class DialogContentDialog {
       this.titleValid = false;
      // console.log('Titulo NO es valido...',!this.title.hasError('minlength'), !this.title.hasError('required'), !this.title.hasError('whitespace'));
     }
+    /* SE QUITO A PETICION DEL CLIENTE
     //Descripcion
     if(!this.descr.hasError('minlength') && !this.descr.hasError('required') && !this.descr.hasError('whitespace')&& !this.descr.hasError('pattern'))
     {
@@ -231,7 +241,7 @@ export class DialogContentDialog {
     }else{
       this.descrValid = false;
      // console.log('Descr NO es valido...');
-    }
+    }*/
     //URL de Imagen
     if(!this.url_img.hasError('minlength') && !this.url_img.hasError('required') && !this.url_img.hasError('whitespace')&& !this.url_img.hasError('pattern'))
     {
@@ -254,14 +264,14 @@ export class DialogContentDialog {
     if(this.content != null)
     {
       this.contentValid = true;
-      //console.log('CONTENIDO:',this.content);
+     // console.log('CONTENIDO:',this.content);
     }else{
       this.contentValid = false;
-     // console.log('content NO es valido...');
+      //console.log('content NO es valido...');
     }
 
-
-    if (this.priceValid && this.url_imgValid && this.descrValid && this.titleValid && this.contentValid)
+//&& this.descrValid
+    if (this.priceValid && this.url_imgValid  && this.titleValid)
     {
       this.valido = true;
     }else{
@@ -270,7 +280,7 @@ export class DialogContentDialog {
 
   }
 
-
+  
   matcher = new MyErrorStateMatcher();
-
+  
 }

@@ -5,8 +5,10 @@
 .mainContainer {
     min-width: 98vw;
     min-height: 100vh;
+
   }
 
   .centerContainer{
     min-height: 45rem;
+   
   }

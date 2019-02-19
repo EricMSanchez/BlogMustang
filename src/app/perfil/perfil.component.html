@@ -1,0 +1,77 @@
+<div class="container">
+    <a  routerLink="/"> <b>Categorias </b> </a> <fa-icon [icon]="['fas', 'arrow-right']" ></fa-icon> <b> {{Username}}</b>
+    <br>
+    <div class="text-center" *ngIf="!isUser">
+      <fa-icon [icon]="['fas', 'cog']" [pulse]="true" size="3x"></fa-icon>
+      <h3>Cargando</h3>
+    </div>
+    <div  *ngIf="isUser">
+      <div class="text-center" > 
+        <div style="width:150px;height:150px;" class="rounded-circle image"> 
+          <img *ngIf="Photo_url" style="width:150px;height:150px;" [src]="Photo_url" class="rounded-circle" />
+          <img *ngIf="!Photo_url" style="width:150px;height:150px;" src="assets/img/user.jpg" class="rounded-circle" />
+          <input 
+  style="display: none" 
+  type="file" (change)="onFileChanged($event)" 
+  #fileInput>
+          <a routerLink="./" (click)="fileInput.click()" class="label" >Cambiar imagen</a>
+        </div>
+      </div>
+    <div class="text-center">
+          <form class="text-left">
+              <div class="form-group">
+                
+                  <label for="inputEmail4">Nombre</label>
+                  <input class="form-control" [(ngModel)]="Name" name="Name" [disabled]="name" type="text">
+              </div>
+              <div class="form-row">
+                  <div class="form-group col-md-6">
+                <label for="inputAddress">Username</label>
+                <p class="form-control">{{Username}}</p>
+              </div>
+              <div class="form-group col-md-6">
+                  <label for="inputAddress">Email</label>
+                  <p class="form-control">{{Email}}</p>
+                </div>
+              </div>
+              <div class="form-row">
+                  <div class="form-group col-md-5">
+                    <label for="inputCity">Calle</label>
+                    <input class="form-control"  [(ngModel)]="Calle" name="Calle" [disabled]="calle" type="text">
+                  </div>
+                  <div class="form-group col-md-5">
+                    <label for="inputState">Colonia</label>
+                    <input class="form-control" [(ngModel)]="Colonia" name="Colonia" [disabled]="colonia" type="text">
+                  </div>
+                  <div class="form-group col-md-2">
+                    <label for="inputZip">Numero</label>
+                    <input class="form-control" [(ngModel)]="Numero" name="Numero" [disabled]="numero" type="text">
+                  </div>
+                </div>
+              <div class="form-row">
+                <div class="form-group col-md-3">
+                  <label for="inputCity">Ciudad</label>
+                  <input class="form-control" [(ngModel)]="Ciudad" name="Ciudad" [disabled]="ciudad" type="text">
+                </div>
+                <div class="form-group col-md-5">
+                  <label for="inputState">Estado</label>
+                  <input class="form-control" [(ngModel)]="Estado" name="Estado" [disabled]="estado" type="text">
+                </div>
+                <div class="form-group col-md-4">
+                  <label for="inputZip">Pais</label>
+                  <input class="form-control" [(ngModel)]="Pais" name="Pais" [disabled]="pais" type="text">
+                </div>
+              </div>
+              <div class="row justify-content-md-end">
+                  <a mat-fab  class="btn btn-primary bt m-2"  matTooltip="{{Button}} la informacion." (click)="enableAll(!All)" >
+                      <fa-icon [icon]="isEdit?['fa', 'edit']:['fa', 'save']"></fa-icon>
+                  </a>
+              </div>
+            </form>
+    </div>
+    <div class="row justify-content-md-center">
+        <ngb-alert class="my-1" style="position:absolute;z-index: 999" *ngIf="successMessage" type="{{type}}" (close)="successMessage = null">{{ successMessage }}</ngb-alert>
+    </div>
+    </div>
+
+</div>

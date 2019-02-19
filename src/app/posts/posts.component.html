@@ -1,9 +1,9 @@
 
 <div class="container">
-    <a  routerLink="/"> <b>Categorias</b> </a> > <b>{{titulo}}</b>
+    <a  routerLink="/"> <b>Categorias </b> </a> <fa-icon [icon]="['fas', 'arrow-right']" ></fa-icon> <b> {{titulo}}</b>
     <br>
     
-    <button class="btn btn-primary mine" (click)="openDialog()" mat-fab color="primary" >
+    <button *ngIf="auth.isLoggedIn" class="btn btn-primary mine bt" (click)="openDialog()" mat-fab color="primary" >
         <mat-icon>add</mat-icon>
     </button>
         <br>
@@ -21,12 +21,20 @@
             <a class="text-dark" routerLink=""  (click)="toPost(post.posts_id,post.title,post.image_url,post.body)">{{post.title}}</a>
           </h3>
           <div class="mb-1 text-muted">{{post.created_date | date : 'd-M-yyyy hh:mm a'}}</div>
-          Publicado por:<strong class="d-inline-block mb-2 text-primary"><a routerLink="/">{{post.users.name}}</a></strong>
+          Publicado por:
+          <div *ngIf="auth.isLoggedIn">
+          <strong class="d-inline-block mb-2 text-primary">
+              <a (click)=" toUser(post.users.users_id)" routerLink="">{{post.users.name}} </a> <fa-icon *ngIf="post.users.privileges_privilege_id == 3" matTooltip="Usuario Verificado: usuario que se ha identificado con el administrador de la pagina." class="check" [icon]="['fas', 'check-circle']" ></fa-icon></strong>
+          </div> 
+          <div *ngIf="!auth.isLoggedIn">
+            <a  class="float-left" ><strong>{{post.users.name}}</strong></a>
+          </div> 
           <p *ngIf="CategoriaId==2">Precio: {{post.price | currency}}</p>
-          <p class="card-text mb-auto">{{post.description}}</p>
-          <a routerLink=""  (click)="toPost(post.posts_id,post.title,post.image_url,post.body)">Continuar leyendo...</a>
+          <!--p class="card-text mb-auto">{{post.description}}</p-->
+          <br><br><br>
+          <a routerLink=""  (click)="toPost(post.posts_id,post.title,post.image_url,post.body)">Ir al post...</a>
         </div>
-        <img class="card-img-right flex-auto d-none d-lg-block" onError="this.src='../../assets/img/error.png'" style="width: 300px; height: 300px;object-fit:scale-down;background-color: #000000" src="{{post.image_url}}" >
+        <img class="card-img-right flex-auto d-none d-lg-block" onError="this.src='assets/img/error.png'" style="width: 300px; height: 300px;object-fit:scale-down;background-color: #000000" src="{{post.image_url}}" >
       </div>
 
 

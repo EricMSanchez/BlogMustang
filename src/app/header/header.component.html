@@ -1,24 +1,51 @@
 <div class="container">
-<header class="blog-header py-2">
+    <div class="row justify-content-md-center">
+        <ngb-alert class="mt-2" style="position:absolute;z-index: 999" *ngIf="successMessage" type="{{type}}" (close)="successMessage = null">{{ successMessage }}</ngb-alert>
+    </div>
+<header class="blog-header py-2 px-2">
     <div class="row ">
-       
-      <div class="col-4 pt-1">
-          <img src="//placehold.it/50" class="rounded-circle" />
+      <div class="col-8 pt-1">
+          <div *ngIf="isLoggedIn()"  class="d-flex align-items-center">
+              <img *ngIf="user.photo_url" style="width:50px;height:50px;" [src]="user.photo_url" class="rounded-circle img-thumbnail" />
+              <img *ngIf="!user.photo_url" style="width:50px;height:50px;" src="assets/img/user.jpg" class="rounded-circle img-thumbnail" />
+              <div class="d-flex flex-column ml-1">
+              <p class="my-0" style="font-size:12px">{{user.name}} <fa-icon *ngIf="user.privileges_privilege_id == 3" matTooltip="Usuario Verificado: usuario que se ha identificado con el administrador de la pagina." class="check" [icon]="['fas', 'check-circle']" ></fa-icon></p>
+              <p class="my-0" style="font-size:12px"><a routerLink="perfil">Ver Perfil</a></p>
+              </div>
+          </div>
+        
       </div>
-      <div class="col-8 d-flex justify-content-end align-items-center">
-          <button mat-raised-button routerLink="" (click)="toRegistro()"><fa-icon [icon]="['fa', 'user-plus']"></fa-icon> Registro</button>
-          <button mat-raised-button (click)="openDialog()" class="ml-1" routerLink=""><fa-icon [icon]="['fa', 'sign-in-alt']"></fa-icon> Iniciar Sesion</button>
+      <div class="col-4 d-flex justify-content-end align-items-center">
+            <button *ngIf="isLoggedIn()" matTooltip="Contacto" mat-raised-button routerLink="" (click)="toContacto()"><fa-icon [icon]="['fas', 'exclamation-circle']"></fa-icon> <span> Contacto</span></button>
+          <button *ngIf="isLoggedIn()" matTooltip="Cerrar Sesion" mat-raised-button routerLink="" class="ml-1" (click)="closeSesion()"><fa-icon [icon]="['fa', 'sign-out-alt']"></fa-icon> <span>Cerrar Sesion</span></button>
+          <button *ngIf="!isLoggedIn()" matTooltip="Registro" mat-raised-button routerLink="" class="ml-1" (click)="toRegistro()"><fa-icon [icon]="['fa', 'user-plus']"></fa-icon> <span>Registro</span></button>
+          <button *ngIf="!isLoggedIn()" matTooltip="Iniciar Sesion" mat-raised-button (click)="openDialog()" class="ml-1" routerLink=""><fa-icon [icon]="['fa', 'sign-in-alt']"></fa-icon> <span>Iniciar Sesion</span> </button>
       </div>
 
     </div>
+    
   </header>
-  <div class="jumbotron text-white rounded bg-dark">
-    <div class="row">
-      <div class="col-12">
-        <h2 class="">Bienvenido al Foro TodoMustangMx!</h2>
-        <p class="lead my-3">Antes que nada podrias pasar leer las reglas del foro.</p>
-        <p class="lead mb-0"><a href="#" class="text-white font-weight-bold">Continuar leyendo...</a></p>
+  <div class="container">
+    <div class="jumbotron text-white rounded bg-dark py-2 px-2">
+      <div class="row">
+        <div class="col-12">
+          <img  src="assets/img/logo.jpg" style="width: 100%;" />
+          <p *ngIf="!editable" class="lead text-justify my-2">
+              {{avisoAdministrador}}
+          </p>
+          <app-ngx-editor *ngIf="editable" [config]="editorConfig" [(ngModel)]="avisoAdministrador"></app-ngx-editor>
+          <!--p class="lead mb-0"><a href="#" class="text-white font-weight-bold"></a></p-->
+        </div>
+    
+        </div>
+        <div class="row">
+            <div class="col-12 text-right">
+                <a *ngIf="(showBtn && isLoggedIn())" mat-fab  class="btn btn-primary bt m-2" color="warm" matTooltip="Editar aviso de administrador." (click)="editNotice(editable)" >
+                    <fa-icon [icon]="editable?['fa', 'save']:['fa', 'edit']"></fa-icon>
+                </a>
+            </div>
+        </div>
       </div>
-      </div>
-    </div>
+  </div>
+
 </div>

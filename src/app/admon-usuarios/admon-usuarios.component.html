@@ -1,0 +1,42 @@
+<div class="container">
+  <a  routerLink="/"> <b>Categorias </b> </a> <fa-icon [icon]="['fas', 'arrow-right']" ></fa-icon> <b> {{titulo}}</b>
+  <br>
+  <div class="row">
+    <div class="col-12">
+      <p>Lista de los usuarios y sus estatus, hacer click en el boton Activar/Desactivar para cambiar el estatus.</p> 
+    </div>
+  </div>
+  <table class="table table-responsive-sm table-hover text-center">
+      <thead>
+        <tr class="">
+          <th scope="col">Nombre</th>
+          <th scope="col">Username</th>
+          <th scope="col">Email</th>
+          <th scope="col">Ultima modificación</th>
+          <th scope="col">Estatus</th>
+          <th scope="col"></th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let user of users">
+          <th scope="row">{{user.name}}</th>
+          <td>{{user.username}}</td>
+          <td>{{user.email}}</td>
+          <td>{{user.modified_date | date:'dd-MM-yyyy hh:mm:ss a':'+0000'}}</td>
+          <td *ngIf="user.active == 1" class="text-center"><fa-icon [icon]="['fa', 'user']" style="color:rgb(53, 128, 66)"   matTooltip="Activo"></fa-icon><span></span></td>
+          <td *ngIf="user.active == 0" class="text-center"><fa-icon [icon]="['fa', 'user-slash']" style="color:#f44336"  matTooltip="Inactivo"></fa-icon><span></span></td>
+          <td class="text-center">
+            <button *ngIf="user.active == 1" (click)="changeUserStatus(user.users_id,0)" color="warn" matTooltip="Desactivar Usuario" mat-raised-button  class="ml-1"><fa-icon [icon]="['fa', 'times']"></fa-icon> <span> Desactivar</span></button>
+            <button *ngIf="user.active == 0" (click)="changeUserStatus(user.users_id,1)" matTooltip="Activar Usuario" mat-raised-button class="ml-1"><fa-icon [icon]="['fa', 'check']"></fa-icon> <span> Activar</span></button>
+          </td>
+        </tr>
+        <!--tr>
+            <th scope="row">Partes No Mustang</th>
+            <td>Mi auto esta descompuesto y no funciona</td>
+            <td>user43p</td>
+            <td class="text-center"><fa-icon [icon]="['fa', 'lock']"  matTooltip="Cerrado"></fa-icon><span></span></td>
+            <td class="text-center"><button *ngIf="true" color="" matTooltip="Abrir Post" mat-raised-button routerLink="" class="ml-1"><fa-icon [icon]="['fa', 'lock-open']"></fa-icon> <span> Abrir</span></button></td>
+          </tr-->
+      </tbody>
+    </table>
+</div>

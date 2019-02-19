@@ -18,7 +18,7 @@
                 Titulo es un campo <strong>obligatorio</strong>.
               </mat-error>
             </mat-form-field>
-            <mat-form-field>
+            <!--mat-form-field>
                 <input  (change)="validando()" matInput placeholder="Descripcion" [formControl]="descr"
                 [errorStateMatcher]="matcher">
               <mat-error *ngIf="!descr.hasError('minLength(7)') || !descr.hasError('required') && descr.hasError('whitespace')">
@@ -27,7 +27,7 @@
               <mat-error *ngIf="descr.hasError('required')">
                 Descripcion es un campo <strong>obligatorio</strong>.
               </mat-error>
-            </mat-form-field>
+            </mat-form-field-->
             <mat-form-field>
                   <input  (change)="validando()"  matInput placeholder="URL de Imagen" [formControl]="url_img"
                 [errorStateMatcher]="matcher">
@@ -48,15 +48,17 @@
               Precio es un campo <strong>obligatorio</strong>.
             </mat-error>
             </mat-form-field>
-   
-                <app-ngx-editor (change)="validando()" [config]="editorConfig" [(ngModel)]="content"></app-ngx-editor>
+            
+                <app-ngx-editor [config]="editorConfig" [(ngModel)]="content"></app-ngx-editor>
+ 
+                
                 <!--textarea  (change)="validando()"  matInput rows="5" matInput placeholder="Contenido" [formControl]="content"
               [errorStateMatcher]="matcher"></textarea-->
-
+            
           </div>
           
       </mat-dialog-content>
       <mat-dialog-actions align="end">
         <button mat-raised-button mat-dialog-close>Cancel</button>
-        <button mat-raised-button [mat-dialog-close]="valido" [disabled]="!valido" cdkFocusInitial>Postear</button>
+        <button *ngIf="(this.content!=null && this.content.trim() != '')" mat-raised-button [mat-dialog-close]="valido" [disabled]="!valido" cdkFocusInitial>Postear</button>
       </mat-dialog-actions>

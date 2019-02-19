@@ -1,11 +1,20 @@
 {
-    "/api/*": {
+    "/API": {
         "target": "http://localhost",
         "secure": false,
         "logLevel": "debug",
-        "changeOrigin": true,
-        "pathRewrite": {
-          "^/api": ""
-        }
+        "changeOrigin": true
+      },
+      "comment_para_un_futuro":{
+        "/API": {
+            "target": "http://localhost",
+            "secure": false,
+            "logLevel": "debug",
+            "changeOrigin": true,
+            "pathRewrite": {
+              "^/API": ""
+            }
+          }
       }
+      
 }

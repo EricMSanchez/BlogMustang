@@ -1,6 +1,7 @@
 
 export class User{
   constructor() { }
+    id:String;
     username:String;
     email:String;
     password:String;
@@ -16,4 +17,6 @@ export class User{
     estado:String;
     ciudad:String;
     tel:String;
+    created_date:String;
+    modified_date:String;
   }

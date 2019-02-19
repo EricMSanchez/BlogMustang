@@ -13,12 +13,12 @@ export const slideInAnimation = (
 
       group([
         query(':leave', [
-          animate('500ms ease-in-out', style({
+          animate('600ms ease-in-out', style({
             transform: 'translateX(100vw)'
           }))
         ], { optional: true }),
         query(':enter', [
-          animate('500ms ease-in-out', style({
+          animate('600ms ease-in-out', style({
             transform: 'translateX(0)'
           }))
         ], { optional: true })

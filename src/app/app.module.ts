@@ -24,6 +24,19 @@ import { TooltipModule } from 'ngx-bootstrap/tooltip';
 import { LoginComponent } from './login/login.component';
 import { RegistroComponent } from './registro/registro.component';
 import { FooterComponent } from './footer/footer.component';
+import { ActiveComponent } from './active/active.component';
+import { AuthGuard } from './auth.guard'
+import { AuthService } from './auth.service';
+import { PerfilComponent } from './perfil/perfil.component';
+import { ForgotComponent } from './forgot/forgot.component';
+import { ResetComponent } from './reset/reset.component';
+import { UsuarioComponent } from './usuario/usuario.component';
+import { EventEmiterService } from './event-emiter.service';
+import { ContactoComponent } from './contacto/contacto.component';
+import { AdminComponent } from './admin/admin.component';
+import { AdmonUsuariosComponent } from './admon-usuarios/admon-usuarios.component';
+import { AdmonPostsComponent } from './admon-posts/admon-posts.component';
+import { AdmonCategoriasComponent, DialogContent } from './admon-categorias/admon-categorias.component';
 //import {MatDialog} from '@angular/material/dialog';
 //import {BehaviorSubject} from '../../node_modules/rxjs'
 @NgModule({
@@ -34,14 +47,25 @@ import { FooterComponent } from './footer/footer.component';
     PostsComponent,
     DialogContentComponent,
     DialogContentDialog,
+    DialogContent,
     HomeComponent,
     CalificaComponent,
     PostComponent,
     LoginComponent,
     RegistroComponent,
-    FooterComponent
+    FooterComponent,
+    ActiveComponent,
+    PerfilComponent,
+    ForgotComponent,
+    ResetComponent,
+    UsuarioComponent,
+    ContactoComponent,
+    AdminComponent,
+    AdmonUsuariosComponent,
+    AdmonPostsComponent,
+    AdmonCategoriasComponent
   ],
-  entryComponents:[DialogContentDialog],
+  entryComponents:[DialogContentDialog,DialogContent,],
   imports: [
     TooltipModule.forRoot(),
     NgxEditorModule, 
@@ -70,11 +94,12 @@ import { FooterComponent } from './footer/footer.component';
         {
           path:'califica',
           component:CalificaComponent,
+          canActivate: [AuthGuard],
           data: { animation: 'califica' }
         },
         {
           path :'',
-          component:HomeComponent,
+          component:MenuComponent,
           data: { animation: 'home' }
         },
         {
@@ -91,7 +116,53 @@ import { FooterComponent } from './footer/footer.component';
           path: 'registro',
           component:RegistroComponent,
           data: {animation:'registro'}
+        },
+        {
+          path: 'activacion',
+          component:ActiveComponent,
+          data: {animation:'activacion'}
+        },
+        {
+          path: 'perfil',
+          component:PerfilComponent,
+          data: {animation:'perfil'}
+        },
+        {
+          path: 'forgotPassword',
+          component:ForgotComponent,
+          data: {animation:'forgotPassword'}
+        },
+        {
+          path: 'changePassword',
+          component:ResetComponent,
+          data: {animation:'changePassword'}
+        },
+        {
+          path: 'usuario',
+          component:UsuarioComponent,
+          data: {animation:'usuario'}
+        },
+        {
+          path: 'contacto',
+          component:ContactoComponent,
+          data: {animation:'contacto'}
+        },
+        {
+          path: 'usersadmon',
+          component:AdmonUsuariosComponent,
+          data: {animation:'usersadmon'}
+        },
+        {
+          path: 'postsadmon',
+          component:AdmonPostsComponent,
+          data: {animation:'postsadmon'}
+        },
+        {
+          path: 'categoryadmon',
+          component:AdmonCategoriasComponent,
+          data: {animation:'categoryadmon'}
         }
+
       ]
     ),
     HttpClientModule
@@ -99,7 +170,7 @@ import { FooterComponent } from './footer/footer.component';
   exports: [
     NgcFloatButtonModule
   ],
-  providers: [MenuService,PostsService,ErrorStateMatcher,ShowOnDirtyErrorStateMatcher],
+  providers: [MenuService,PostsService,ErrorStateMatcher,ShowOnDirtyErrorStateMatcher,AuthGuard,AuthService,EventEmiterService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

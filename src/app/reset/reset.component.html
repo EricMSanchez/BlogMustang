@@ -1,0 +1,58 @@
+<div class="container">
+    <div class="row justify-content-start ml-2" *ngIf="!existeToken"> 
+      <p>Ocurrio un problema, no se recibio el token para poder cambiar la contraseña, favor de intentar de nuevo.</p>
+    </div>
+  <div *ngIf="existeToken"> 
+    <a  routerLink="/"> <b>Categorias </b> </a> <fa-icon [icon]="['fas', 'arrow-right']" ></fa-icon> <b> Cambiar contraseña</b>
+    <br>
+    <br>
+    <div class="row justify-content-start ml-2">
+        <div class="center-text">
+        <p>Favor de ingresar su nuevo password y confirmarlo, posteriormente hacer click en guardar.</p>
+         </div>
+    </div>
+    <div class="row justify-content-center">
+
+      <div class="center-text">
+          <form [formGroup]="form" >
+              <div class="example-container mb-3">
+              <mat-form-field  appearance="legacy" >
+                  <input matInput placeholder="Password" [type]="hide ? 'password' : 'text'" formControlName="password" required>
+                  <mat-icon matSuffix (click)="hide = !hide">{{hide ? 'visibility_off' : 'visibility'}}</mat-icon>
+                  <mat-hint class="ac-form-field-description">De 6 a 24 caracteres.</mat-hint>
+                  <mat-error *ngIf="form.get('password').hasError('required')">
+                      Password es obligatorio.
+                  </mat-error>
+                  <mat-error *ngIf="form.get('password').hasError('minlength')">
+                      Password con menos de 6 caracteres.
+                  </mat-error>
+                  <mat-error *ngIf="form.get('password').hasError('maxlength')">
+                      Password con mas de 24 caracteres.
+                  </mat-error>
+                </mat-form-field>
+            
+                <mat-form-field  appearance="legacy" >
+                  
+                  <input matInput placeholder="Confirmar Password" [type]="hide ? 'password' : 'text'" formControlName="passwordConfirm" [errorStateMatcher]="passwordsMatcher" required>
+                  <mat-icon matSuffix (click)="hide = !hide">{{hide ? 'visibility_off' : 'visibility'}}</mat-icon>
+                  <mat-hint class="ac-form-field-description">De 6 a 24 caracteres.</mat-hint>
+                  <mat-error *ngIf="form.hasError('passwordsNotEqual')" >Las contraseñas no coinciden!</mat-error>
+                  <mat-error *ngIf="form.get('passwordConfirm').hasError('required')">
+                      Confirmar el password es obligatorio.
+                  </mat-error>
+                </mat-form-field>
+                </div>
+          </form>
+      </div>
+
+    </div>
+    <div class="row justify-content-end"><button class="mr-5" [disabled]="!form.valid" (click)="savePassword()" mat-raised-button>Guardar</button></div>
+    <div class="text-center" *ngIf="load">
+        <fa-icon [icon]="['fas', 'cog']" [pulse]="true" size="3x"></fa-icon>
+        <h3>Por favor espere...</h3>
+      </div>
+    <div class="row justify-content-md-center my-1">
+        <ngb-alert class="my-1" style="position:absolute;z-index: 999" *ngIf="successMessage" type="{{type}}" (close)="successMessage = null">{{ successMessage }}</ngb-alert>
+    </div>
+    </div>
+</div>

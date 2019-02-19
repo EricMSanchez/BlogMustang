@@ -1,8 +1,130 @@
 <div class="container">
-    <a  routerLink="/"> <b>Categorias</b> </a> > <a (click)="toCategory()" routerLink=""><b>{{category}}</b></a> > <b>{{title}}</b>
-    <br><br>
-<div class="container" [innerHtml]="myStyle">
-
+    <div class="text-center" *ngIf="!category">
+        <fa-icon [icon]="['fas', 'cog']" [pulse]="true" size="3x"></fa-icon>
+        <h3>Cargando</h3>
+    </div>
 </div>
 
+<div *ngIf="category" class="container">
+    <a  routerLink="/"> <b>Categorias</b> </a> > <a (click)="toCategory()" routerLink=""><b>{{category}}</b></a> > <b>{{title}}</b>
+    <br><br>
+    <div class="card-body border rounded">
+        <div class="row">
+                <div class="col-md-12">
+                        <img class="img-fluid" onError="this.src='assets/img/error.png'" src="{{image_url}}" >
+                    <br>
+                        <div *ngIf="isLoggedIn()" class="" [innerHtml]="myStyle">
+                        
+                        </div>
+                        <div *ngIf="!isLoggedIn()" class="" >
+                            <p>Para ver el contendido del post favor de <a routerLink="/registro">registrarse</a> o <a routerLink="./" (click)="openLogin()">iniciar sesion</a></p>
+                        </div>
+                        <div class="clearfix"></div>
+                       
+                        <p>
+                                
+                        </p>
+                        </div>
+        </div>
+
+</div>
+<br>
+<div *ngIf="auth.isLoggedIn" >
+    <div class="card my-2">
+            <div class="card-body">
+                <div class="row">
+                    <div class="col-4 col-sm-4 col-md-3 col-lg-2">
+                            <img *ngIf="getPhotoUrl()" [src]="getPhotoUrl()" class="img rounded-circle img-thumbnail"/>
+                            <img *ngIf="!getPhotoUrl()" src="assets/img/user.jpg" class="img rounded-circle  img-thumbnail"/>
+                        <p class="text-secondary text-center">{{getUsername()}}</p>
+                    </div>
+                    <div class="col-8 col-sm-8 col-md-9 col-lg-10">
+                        <p>
+                            <!--a class="float-left" routerLink=""><strong>{{this.auth.getUser().username}}</strong></a-->
+                            <!--span class="float-right"><i class="text-warning fa fa-star"></i></span>
+                            <span class="float-right"><i class="text-warning fa fa-star"></i></span>
+                            <span class="float-right"><i class="text-warning fa fa-star"></i></span>
+                            <span class="float-right"><i class="text-warning fa fa-star"></i></span-->
+    
+                       </p>
+                       <div class="clearfix"></div>
+                        <p>
+                            <label for="exampleFormControlTextarea1">Comentar:</label>
+                            <textarea [(ngModel)]="message"  class="form-control" id="exampleFormControlTextarea1" rows="3"></textarea>
+                            
+                        </p>
+                        <p>
+                            <a mat-raised-button (click)="addComment()" class="float-right btn btn-outline-default ml-2"> <i class="fa fa-comment"></i> Comentar</a>
+                       </p>
+                    </div>
+                </div>
+                    <!-- AQUI VA LO COMENTADO -->
+            </div>
+        </div>
+</div>
+<br><br>
+        
+        
+<div *ngIf="comments">
+        <hr>
+        <h2 class="text-center">Comentarios:</h2>
+   
+        <br>
+        <div *ngFor="let comment of comments" class="card my-2">
+                <div class="card-body">
+                    <div class="row">
+                        <div class="col-4 col-sm-4 col-md-3 col-lg-2">
+                                <img *ngIf="comment.users.photo_url" [src]="comment.users.photo_url"  class="img rounded-circle img-thumbnail"/>
+                                <img *ngIf="!comment.users.photo_url" src="assets/img/user.jpg" class="img rounded-circle img-thumbnail"/>
+                            
+                            <p  class="text-secondary text-center h6 small">{{comment.created_date|date: "dd/MM/yyyy hh:mm a"}}</p>
+                        </div>
+                        <div class="col-8 col-sm-8 col-md-9 col-lg-10">
+                            <p *ngIf="auth.isLoggedIn">
+                                <a  class="float-left mr-1" (click)="toUser(comment.users.users_id)" routerLink=""><strong>{{comment.users.username}} </strong></a> <fa-icon *ngIf="comment.users.privileges_privilege_id == 3" matTooltip="Usuario Verificado: usuario que se ha identificado con el administrador de la pagina." class="check" [icon]="['fas', 'check-circle']" ></fa-icon>
+                                
+                                <!--span class="float-right"><i class="text-warning fa fa-star"></i></span>
+                                <span class="float-right"><i class="text-warning fa fa-star"></i></span>
+                                <span class="float-right"><i class="text-warning fa fa-star"></i></span>
+                                <span class="float-right"><i class="text-warning fa fa-star"></i></span-->
+        
+                           </p>
+                           <p *ngIf="!isLoggedIn()">
+                                <a  class="float-left mr-1" ><strong>{{comment.users.username}} </strong> </a>
+                           </p>
+                           
+                           <div class="clearfix"></div>
+                            <p class="">{{comment.mesage}}</p>
+                            <p>
+                                <!--a mat-raised-button class="float-right btn btn-outline-default ml-2"> <i class="fa fa-reply"></i> Responder</a-->
+                           </p>
+                        </div>
+                    </div>
+                        <!-- AQUI VA LO COMENTADO -->
+                </div>
+            </div>
+</div>
+        
+        
+
+
+    </div>
+<!--div class="card card-inner">
+                        <div class="card-body">
+                            <div class="row">
+                                <div class="col-md-2">
+                                    <img src="https://image.ibb.co/jw55Ex/def_face.jpg" class="img img-rounded img-fluid"/>
+                                    <p class="text-secondary text-center">15 Minutes Ago</p>
+                                </div>
+                                <div class="col-md-10">
+                                    <p><a href="https://maniruzzaman-akash.blogspot.com/p/contact.html"><strong>Maniruzzaman Akash</strong></a></p>
+                                    <p>Lorem Ipsum is simply dummy text of the pr make  but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.</p>
+                                    <p>
+                                        <a class="float-right btn btn-outline-primary ml-2">  <i class="fa fa-reply"></i> Reply</a>
+                                        <a class="float-right btn text-white btn-danger"> <i class="fa fa-heart"></i> Like</a>
+                                   </p>
+                                </div>
+                            </div>
+                        </div>
+                    </div-->
 

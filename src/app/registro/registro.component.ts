@@ -13,7 +13,7 @@ import { User } from '../models/User'
 })
 export class RegistroComponent implements OnInit {
   form: any;
-  user:Usuario;
+
   emailValido = true;
   usuarioValido = true;
   passwordsMatcher = new RepeatPasswordEStateMatcher;
@@ -123,25 +123,26 @@ openDialog() {
  saveUsuario(){
   this.emailValido = true;
   this.usuarioValido = true;
-  this.user = new User();
-  this.user.username = this.form.get('usuario').value;
-  this.user.password = this.form.get('password').value;
-  this.user.name = this.form.get('nombre').value;
-  this.user.email = this.form.get('email').value;
-  this.user.photo_url = ''; //this.form.get('photo_url').value;
-  this.user.privileges_privilege_id = "1";
-  this.user.rating = "0";
-  this.user.active = "0";
-  this.user.calle = this.form.get('calle').value;
-  this.user.numeroExt = this.form.get('numeroExt').value;
-  this.user.pais = this.form.get('pais').value;
-  this.user.estado = this.form.get('estado').value;
-  this.user.ciudad = this.form.get('ciudad').value;
-  this.user.tel = ''; //this.form.tel.value;//aun no implementado
+  let user = new User();
+  user.username = this.form.get('usuario').value;
+  user.password = this.form.get('password').value;
+  user.name = this.form.get('nombre').value;
+  user.email = this.form.get('email').value;
+  user.photo_url = ''; //this.form.get('photo_url').value;
+  user.privileges_privilege_id = "2";
+  user.rating = "0";
+  user.active = "0";
+  user.calle = this.form.get('calle').value;
+  user.colonia = this.form.get('colonia').value;
+  user.numeroExt = this.form.get('numeroExt').value;
+  user.pais = this.form.get('pais').value;
+  user.estado = this.form.get('estado').value;
+  user.ciudad = this.form.get('ciudad').value;
+  user.tel = ''; //this.form.tel.value;//aun no implementado
   this.mensaje = '';
   this.staticAlertClosed = true;
   this.tmp = this.tmp2 = '1234567689123456789123456789';
-  this.users.addUser(this.user).subscribe(response => { 
+  this.users.addUser(user).subscribe(response => { 
 
     if(response.success){
       this.openDialog(); 
@@ -226,21 +227,3 @@ export class MyErrorStateMatcher implements ErrorStateMatcher {
   }
 }
 
-export class Usuario{
-  constructor() { }
-    username:String;
-    email:String;
-    password:String;
-    name:String;
-    photo_url:String;
-    privileges_privilege_id:String;
-    rating:String;
-    active:String;
-    calle:String;
-    colonia:String;
-    numeroExt:String;
-    pais:String;
-    estado:String;
-    ciudad:String;
-    tel:String
-}

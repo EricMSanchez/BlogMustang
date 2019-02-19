@@ -1,0 +1,40 @@
+<h2 mat-dialog-title>Editar Categoria</h2>
+      
+      <mat-dialog-content class="mat-typography">
+       
+          <p>Presionar guardar para que los cambios se vean reflejados.</p>
+
+          <form class="example-container" [formGroup]="loginForm">
+            <mat-form-field>
+              <input type="text" matInput placeholder="Titulo"  formControlName="title">
+              <mat-error *ngIf="loginForm.get('title').hasError('required')">Favor de ingresar el <b>titulo</b>.</mat-error>
+            </mat-form-field>
+            <mat-form-field>
+              <textarea  matAutosizeMinRows=3 matInput placeholder="Descripcion" formControlName="description"></textarea>
+              <mat-error *ngIf="loginForm.get('description').hasError('required')">Favor de ingresar la <b>descripcion</b>.</mat-error>
+            </mat-form-field>
+            <mat-form-field>
+              <input type="text" matInput placeholder="Imagen"  formControlName="imagen" >
+              <mat-error *ngIf="loginForm.get('imagen').hasError('required')">Favor de ingresar la <b>imagen</b>.</mat-error>
+            </mat-form-field>
+
+              <mat-checkbox color="primary" *ngIf="enableCheck" formControlName="active">Activo</mat-checkbox>
+
+          </form>
+          <div class="container text-center">
+            <img class="card-img-top"   onError="src='assets/img/error.png'" [src]="loginForm.get('imagen').value" alt="">
+        </div>
+        <input 
+        style="display: none" 
+        type="file" (change)="onFileChanged($event)"  
+        #fileInput>
+          
+      </mat-dialog-content>
+      <mat-dialog-actions align="center">
+        <button mat-raised-button (click)="fileInput.click()" >Cambiar imagen</button>
+      </mat-dialog-actions>
+      <br>
+      <mat-dialog-actions align="end">
+        <button mat-raised-button mat-dialog-close>Cancelar</button>
+        <button mat-raised-button [mat-dialog-close]="!loginForm.invalid" (click)="saveChanges()" [disabled]="loginForm.invalid" >Guardar</button>
+      </mat-dialog-actions>
