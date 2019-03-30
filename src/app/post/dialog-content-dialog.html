@@ -1,0 +1,64 @@
+<h2 mat-dialog-title>Editar post</h2>
+      
+      <mat-dialog-content class="mat-typography">
+          <p><b>Atencion!</b> Se recomienda para subir la imagen el siguiente sitio web: <a href='https://imgur.com/upload' target="_blank">https://imgur.com/upload</a>,</p>
+          <p>para subir la imagen solo es cuestion de arrastrarla desde tu equipo o elegir la imagen mediante</p>
+          <p> el boton de Browse/Buscar. </p>
+          <br>
+        <p>Favor de llenar los campos correspondientes:</p>
+        <div class="example-container">
+            <mat-form-field>
+                <input  (change)="validando()" matInput placeholder="Titulo" [formControl]="title"
+                [errorStateMatcher]="matcher">
+              <!--mat-hint>Este campo es obigatorio!</mat-hint-->
+              <mat-error  *ngIf="!title.hasError('minLength(7)') || !title.hasError('required') && title.hasError('whitespace')">
+                Favor de agergar un titulo con mas de 6 caracteres.
+              </mat-error>
+              <mat-error *ngIf="title.hasError('required')">
+                Titulo es un campo <strong>obligatorio</strong>.
+              </mat-error>
+            </mat-form-field>
+            <!--mat-form-field>
+                <input  (change)="validando()" matInput placeholder="Descripcion" [formControl]="descr"
+                [errorStateMatcher]="matcher">
+              <mat-error *ngIf="!descr.hasError('minLength(7)') || !descr.hasError('required') && descr.hasError('whitespace')">
+                Favor de agergar una descripcion con mas de 6 caracteres.
+              </mat-error>
+              <mat-error *ngIf="descr.hasError('required')">
+                Descripcion es un campo <strong>obligatorio</strong>.
+              </mat-error>
+            </mat-form-field-->
+            <mat-form-field>
+                  <input  (change)="validando()"  matInput placeholder="URL de Imagen" [formControl]="url_img"
+                [errorStateMatcher]="matcher">
+              <mat-error *ngIf="this.title.hasError('pattern')">
+                Favor de agergar un url valido.
+              </mat-error>
+              <mat-error *ngIf="url_img.hasError('required')">
+                Url de la imagen es un campo <strong>obligatorio</strong>.
+              </mat-error>
+            </mat-form-field>
+            <mat-form-field *ngIf="category_id==2">
+              <input  (change)="validando()"  matInput placeholder="Precio" [formControl]="price"
+              [errorStateMatcher]="matcher">
+            <mat-error *ngIf="!price.hasError('minLength(7)') || !price.hasError('required') && price.hasError('whitespace')">
+              Favor de agergar un precio valido.
+            </mat-error>
+            <mat-error *ngIf="price.hasError('required')">
+              Precio es un campo <strong>obligatorio</strong>.
+            </mat-error>
+            </mat-form-field>
+            
+                <app-ngx-editor [config]="editorConfig" [(ngModel)]="content"></app-ngx-editor>
+ 
+                
+                <!--textarea  (change)="validando()"  matInput rows="5" matInput placeholder="Contenido" [formControl]="content"
+              [errorStateMatcher]="matcher"></textarea-->
+            
+          </div>
+          
+      </mat-dialog-content>
+      <mat-dialog-actions align="end">
+        <button mat-raised-button mat-dialog-close>Cancel</button>
+        <button *ngIf="(this.content!=null && this.content.trim() != '')" mat-raised-button [mat-dialog-close]="valido"  cdkFocusInitial>Guardar Cambios</button>
+      </mat-dialog-actions>

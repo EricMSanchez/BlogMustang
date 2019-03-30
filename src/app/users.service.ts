@@ -22,7 +22,7 @@ api = '';
     let now = Date();
     user.created_date = formatDate(now, 'yyyy-MM-dd H:mm:ss', 'en-US', '-8000');
     user.modified_date = formatDate(now, 'yyyy-MM-dd H:mm:ss', 'en-US', '-8000');
-    return this.http.post<myData>('/api/API/Users/register',user,httpOptions);
+    return this.http.post<myData>('/API/Users/register',user,httpOptions);
   }
 
   getUserInfo(token){

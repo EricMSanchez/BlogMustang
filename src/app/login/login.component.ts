@@ -19,8 +19,13 @@ export interface DialogData {
 
 export class LoginComponent implements OnInit {
 
-  constructor(@Inject(MAT_DIALOG_DATA) public data: DialogData,private _eventEmiter: EventEmiterService,private router:Router,private Auth:AuthService
-  ,public dialogRef: MatDialogRef<LoginComponent>,private route:ActivatedRoute) { }
+  constructor(
+    @Inject(MAT_DIALOG_DATA) public data: DialogData,
+    private _eventEmiter: EventEmiterService,
+    private router:Router,
+    private Auth:AuthService,
+    public dialogRef: MatDialogRef<LoginComponent>,
+    private route:ActivatedRoute) { }
   hide = true;
   auser = new User();
   mostrar = true;

@@ -36,6 +36,24 @@ export class PostsService {
       var status = 'Open';
     return this.http.post<myData>(this.api+'/API/Posts/add.json',{posts_id,title,description,image_url,categories_categories_id,users_users_id,created_date,modified_date,body,price,status},httpOptionsToken);
   }
+ /* posts_id,title,image_url,price,content */
+  savePost(
+    posts_id,
+    title,
+    image_url,
+    content,
+    price,
+    token){
+      let httpOptionsToken = {
+        headers: new HttpHeaders({
+          'Content-Type':  'application/json',
+          'Accept': 'application/json',
+          'Authorization':'Bearer '+token
+        })
+      };
+      var status = 'Open';
+    return this.http.post<myData>(this.api+'/API/Posts/edit',{posts_id,title,image_url,content,price},httpOptionsToken);
+  }
 
   getPostsByCategoriesId(categories_id,token){
     let httpOptionsToken = {
@@ -69,6 +87,8 @@ export class PostsService {
     };
     return this.http.post<myData>(this.api+'/API/Commentaries/add',{subject,mesage,posts_posts_id,users_users_id,rating,cometaries_reply_id,created_date,modified_date},httpOptionsToken);
   }
+
+  
 
   getPost(posts_id,categories_id,token){
     let httpOptionsToken = {

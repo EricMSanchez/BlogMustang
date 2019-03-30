@@ -11,6 +11,9 @@
     <div class="card-body border rounded">
         <div class="row">
                 <div class="col-md-12">
+                    <h3 class="text-center mb-2">
+                        {{title}}  <span *ngIf="isPostOwner()">- </span> <a class="edit-link" *ngIf="isPostOwner()" (click)="openDialog()" >Editar</a>
+                    </h3>
                         <img class="img-fluid" onError="this.src='assets/img/error.png'" src="{{image_url}}" >
                     <br>
                         <div *ngIf="isLoggedIn()" class="" [innerHtml]="myStyle">
@@ -34,8 +37,8 @@
             <div class="card-body">
                 <div class="row">
                     <div class="col-4 col-sm-4 col-md-3 col-lg-2">
-                            <img *ngIf="getPhotoUrl()" [src]="getPhotoUrl()" class="img rounded-circle img-thumbnail"/>
-                            <img *ngIf="!getPhotoUrl()" src="assets/img/user.jpg" class="img rounded-circle  img-thumbnail"/>
+                            <img *ngIf="getPhotoUrl()" [src]="getPhotoUrl()" class="img img-thumbnail"/>
+                            <img *ngIf="!getPhotoUrl()" src="assets/img/user.jpg" class="img  img-thumbnail"/>
                         <p class="text-secondary text-center">{{getUsername()}}</p>
                     </div>
                     <div class="col-8 col-sm-8 col-md-9 col-lg-10">
@@ -74,8 +77,8 @@
                 <div class="card-body">
                     <div class="row">
                         <div class="col-4 col-sm-4 col-md-3 col-lg-2">
-                                <img *ngIf="comment.users.photo_url" [src]="comment.users.photo_url"  class="img rounded-circle img-thumbnail"/>
-                                <img *ngIf="!comment.users.photo_url" src="assets/img/user.jpg" class="img rounded-circle img-thumbnail"/>
+                                <img *ngIf="comment.users.photo_url" [src]="comment.users.photo_url"  class="img img-thumbnail"/>
+                                <img *ngIf="!comment.users.photo_url" src="assets/img/user.jpg" class="img img-thumbnail"/>
                             
                             <p  class="text-secondary text-center h6 small">{{comment.created_date|date: "dd/MM/yyyy hh:mm a"}}</p>
                         </div>

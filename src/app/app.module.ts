@@ -13,7 +13,7 @@ import { DemoMaterialModule } from '../app/demo-material/demo-material.module';
 import { RouterModule } from '@angular/router';
 import { HomeComponent } from './home/home.component';
 import { CalificaComponent } from './califica/califica.component';
-import { PostComponent } from './post/post.component'
+import { PostComponent, DialogContentD } from './post/post.component'
 import { MenuService } from './menu.service';
 import { HttpClientModule } from '@angular/common/http'
 import { FormsModule,ReactiveFormsModule} from '@angular/forms'
@@ -63,9 +63,10 @@ import { AdmonCategoriasComponent, DialogContent } from './admon-categorias/admo
     AdminComponent,
     AdmonUsuariosComponent,
     AdmonPostsComponent,
-    AdmonCategoriasComponent
+    AdmonCategoriasComponent,
+    DialogContentD
   ],
-  entryComponents:[DialogContentDialog,DialogContent,],
+  entryComponents:[DialogContentDialog,DialogContent,DialogContentD],
   imports: [
     TooltipModule.forRoot(),
     NgxEditorModule, 
