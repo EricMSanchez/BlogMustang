@@ -100,6 +100,12 @@
     <input matInput placeholder="Ciudad" formControlName="ciudad" autocomplete="off" required>
     <mat-error *ngIf="form.get('ciudad').hasError('required')" >La <b>Ciudad</b> es un campo obligatorio.</mat-error>
 </mat-form-field>
+<mat-form-field appearance="legacy">
+        <mat-label>Tel</mat-label>
+        <input matInput placeholder="Tel" formControlName="tel" autocomplete="off" required>
+        <mat-error *ngIf="form.get('tel').hasError('required')" >El <b>Telefono</b> es un campo obligatorio.</mat-error>
+        <mat-hint class="ac-form-field-description">Numero telefonico de 10 digitos</mat-hint>
+    </mat-form-field>
 <div class="form-field">
     <mat-checkbox name="acceptTerms" formControlName="acceptTerms">Acepto los <a href="https://policies.google.com/terms?hl=es" target="about-blank">términos y condiciones</a></mat-checkbox>
 </div>

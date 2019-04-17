@@ -59,6 +59,7 @@ export class PerfilComponent implements OnInit {
   pais = true;
   estado = true;
   ciudad = true;
+  tel = true;
 
   All = true;
 
@@ -75,6 +76,7 @@ export class PerfilComponent implements OnInit {
   Username = '';
   Email = '';
   Photo_url = '';
+  Tel = '';
 
   isUser = false;
 
@@ -121,6 +123,10 @@ public setLinkPicture(url: string) {
     this.calle = value;
   }
 
+  enableTel(value){
+    this.tel = value;
+  }
+
   enableColonia(value){
     this.colonia = value;
   }
@@ -149,6 +155,7 @@ public setLinkPicture(url: string) {
     this.enablePais(value);
     this.enableCiudad(value);
     this.enableEstado(value);
+    this.enableTel(value);
 
     if(this.isEdit)
     {
@@ -174,6 +181,7 @@ public setLinkPicture(url: string) {
     user.ciudad = this.Ciudad;
     user.estado = this.Estado;
     user.pais = this.Pais;
+    user.tel = this.Tel;
 
     this.users.editUser(user,this.auth.getUser().token).subscribe(data => {
       if(data.success)
@@ -201,6 +209,7 @@ public setLinkPicture(url: string) {
         this.Pais = data.data['pais'];
         this.Ciudad = data.data['ciudad'];
         this.Photo_url = data.data['photo_url'];
+        this.Tel  = data.data['tel'];
         this.isUser = true;
       },err => {
         this.isUser = false;

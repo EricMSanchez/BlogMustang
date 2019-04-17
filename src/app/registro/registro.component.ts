@@ -35,6 +35,7 @@ export class RegistroComponent implements OnInit {
       ,estado : new FormControl('', this.requiredValidation)
       ,ciudad : new FormControl('', this.requiredValidation)
       ,numeroExt : new FormControl('', this.numberValidation)
+      ,tel:new FormControl('',[Validators.required,Validators.minLength(10)])
       ,acceptTerms: new FormControl('', [Validators.requiredTrue])
     }, { validator: RepeatPasswordValidator });
   
@@ -138,7 +139,8 @@ openDialog() {
   user.pais = this.form.get('pais').value;
   user.estado = this.form.get('estado').value;
   user.ciudad = this.form.get('ciudad').value;
-  user.tel = ''; //this.form.tel.value;//aun no implementado
+  user.tel = this.form.get('tel').value;//aun no implementado... se implemento xd 2019-04-17 5:43am
+
   this.mensaje = '';
   this.staticAlertClosed = true;
   this.tmp = this.tmp2 = '1234567689123456789123456789';

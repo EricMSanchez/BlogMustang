@@ -19,9 +19,10 @@ api = '';
   constructor(private http:HttpClient) { }
 
   addUser(user:User){
-    let now = Date();
-    user.created_date = formatDate(now, 'yyyy-MM-dd H:mm:ss', 'en-US', '-8000');
-    user.modified_date = formatDate(now, 'yyyy-MM-dd H:mm:ss', 'en-US', '-8000');
+    let now = new Date();
+    user.created_date = formatDate(now, 'yyyy-MM-dd H:mm:ss', 'en-US');
+    user.modified_date = formatDate(now, 'yyyy-MM-dd H:mm:ss', 'en-US');
+
     return this.http.post<myData>('/API/Users/register',user,httpOptions);
   }
 
